@@ -1,0 +1,1 @@
+# AvvaMobile.Core.Parasut
