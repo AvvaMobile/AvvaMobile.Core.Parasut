@@ -28,6 +28,11 @@ Desteğinize her zaman ihtiyacımız var. Geliştirme ekibine katılmak için l�
 ## Geliştiriciler
 
 - [@jackmuratyilmaz](https://www.github.com/jackmuratyilmaz)
+- [@Onurryilmazz](https://www.github.com/Onurryilmazz)
+- [@ocalesmer](https://www.github.com/ocalesmer)
+- [@cativ3](https://www.github.com/cativ3)
+- [avvamobiledogukan](https://github.com/orgs/AvvaMobile/people/avvamobiledogukan)
+- [AbdulbakiBayansalduz](https://github.com/orgs/AvvaMobile/people/AbdulbakiBayansalduz) 
 
 ## Namespace
 Geliştirmeye başlamadan önce aşağıdaki namespace tanımını yapmalısınız.
