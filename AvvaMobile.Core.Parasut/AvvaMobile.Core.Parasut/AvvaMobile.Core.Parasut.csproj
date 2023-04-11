@@ -3,16 +3,30 @@
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Title>Avva Mobile Paraşüt</Title>
+		<Authors>Avva Mobile Enterprise Solutions</Authors>
+		<Description>Paraşüt API ile kolay ve hızlı çalışmak için hazırlanmış paket.</Description>
+		<PackageProjectUrl>https://github.com/AvvaMobile/AvvaMobile.Core.Parasut</PackageProjectUrl>
+		<PackageIcon>avvamobile.png</PackageIcon>
+		<RepositoryUrl>https://github.com/AvvaMobile/AvvaMobile.Core.Parasut</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>avvamobile;</PackageTags>
+		<NeutralLanguage>tr</NeutralLanguage>
+		<RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
+		<RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
+		<EnableNETAnalyzers>False</EnableNETAnalyzers>
+		<Version>1.1.0</Version>
+		<GenerateDocumentationFile>False</GenerateDocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
 	<ItemGroup>
-	  <None Remove="Models\Responses\" />
-	  <None Remove="Models\Requests\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Models\Responses\" />
-	  <Folder Include="Models\Requests\" />
+		<None Update="avvamobile.png">
+			<PackagePath>\</PackagePath>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<Pack>True</Pack>
+		</None>
 	</ItemGroup>
 </Project>
