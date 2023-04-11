@@ -36,6 +36,9 @@ Desteğinize her zaman ihtiyacımız var. Geliştirme ekibine katılmak için l�
 - [@cativ3](https://www.github.com/cativ3)
 - [@avvamobiledogukan](https://github.com/orgs/AvvaMobile/people/avvamobiledogukan)
 
+## NuGet Paketi
+NuGet kullanımı için [https://www.nuget.org/packages/AvvaMobile.Core.Parasut](https://www.nuget.org/packages/AvvaMobile.Core.Parasut) adresini ziyaret ediniz.
+
 ## Namespace
 Geliştirmeye başlamadan önce aşağıdaki namespace tanımını yapmalısınız.
 ```csharp
@@ -62,10 +65,23 @@ public class ServiceResult<T>
 }
 ```
 
+## Örnekler
+- [Paraşüt Nesnesini Yaratmak](https://github.com/AvvaMobile/AvvaMobile.Core.Parasut/edit/develop/README.md#parasut-nesnesini-yaratmak)
+- [Token Almak](https://github.com/AvvaMobile/AvvaMobile.Core.Parasut/blob/develop/README.md#token-almak)
+- [Yeni Müşteri Yaratmak](https://github.com/AvvaMobile/AvvaMobile.Core.Parasut/blob/develop/README.md#yeni-m%C3%BC%C5%9Fteri-yaratmak)
+- [Müşteriye Ödeme Eklemek](https://github.com/AvvaMobile/AvvaMobile.Core.Parasut/edit/develop/README.md#m%C3%BC%C5%9Fteriye-%C3%B6deme-eklemek)
+- [Yeni Ürün Eklemek](https://github.com/AvvaMobile/AvvaMobile.Core.Parasut/edit/develop/README.md#yeni-%C3%BCr%C3%BCn-eklemek)
+- [Müşteriye Fatura Kesmek](https://github.com/AvvaMobile/AvvaMobile.Core.Parasut/edit/develop/README.md#m%C3%BC%C5%9Fteriye-fatura-kesmek)
+- [Faturaya Ödeme Eklemek](https://github.com/AvvaMobile/AvvaMobile.Core.Parasut/edit/develop/README.md#faturaya-%C3%B6deme-eklemek)
+- [Müşterinin E-Fatura Gelen Kutusu Sorgulaması Yapmak](https://github.com/AvvaMobile/AvvaMobile.Core.Parasut/edit/develop/README.md#m%C3%BC%C5%9Fterinin-e-fatura-gelen-kutusu-sorgulamas%C4%B1-yapmak)
+- [Faturayı E-Faturaya Dönüştür](https://github.com/AvvaMobile/AvvaMobile.Core.Parasut/edit/develop/README.md#faturay%C4%B1-e-faturaya-d%C3%B6n%C3%BC%C5%9Ft%C3%BCr)
+
+
 ## Parasut Nesnesini Yaratmak
 ```csharp
 var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", "COMPANY ID");
 ```
+
 ## Token Almak
 ```csharp
 using AvvaMobile.Core.Parasut;
