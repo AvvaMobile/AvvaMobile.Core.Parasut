@@ -5,13 +5,14 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 	<ItemGroup>
-		<None Remove="Models\" />
-		<None Remove="Newtonsoft.Json" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
 	<ItemGroup>
-		<Folder Include="Models\" />
+	  <None Remove="Models\Responses\" />
+	  <None Remove="Models\Requests\" />
 	</ItemGroup>
 	<ItemGroup>
-	  <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+	  <Folder Include="Models\Responses\" />
+	  <Folder Include="Models\Requests\" />
 	</ItemGroup>
 </Project>
