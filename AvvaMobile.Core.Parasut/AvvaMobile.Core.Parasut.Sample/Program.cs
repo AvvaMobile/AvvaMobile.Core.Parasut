@@ -334,7 +334,7 @@ async Task InvoicePay()
 
 async Task EInvoiceInboxList()
 {
-    var response = await parasut.EInvoiceInbox.List("8170694712");
+    var response = await parasut.EInvoiceInbox.List("VERGİ NUMARASI");
     if (response.IsSuccess)
     {
         Console.WriteLine("E-Invoice Inbox Count: " + response.Data.data.Count);
@@ -353,7 +353,7 @@ async Task EInvoiceCreate()
         {
             attributes = new EInvoiceCreateRequest_Data_Attributes
             {
-                note = "Fatura Notu Test",
+                note = "Fatura Notu",
                 scenario = "commercial",
                 to = "urn:mail:defaultpk@avvamobile.com"
             },
@@ -363,7 +363,7 @@ async Task EInvoiceCreate()
                 {
                     data = new EInvoiceCreateRequest_Data_Relationships_Invoice_Data
                     {
-                        id = "155049858"
+                        id = "FATURA NO" // Paraşütte daha önce eklenmiş ve e-faturaya dönüştürülecek olan faturanın ID'si.
                     }
                 }
             }
@@ -373,7 +373,7 @@ async Task EInvoiceCreate()
     var response = await parasut.EInvoice.Create(model);
     if (response.IsSuccess)
     {
-        Console.WriteLine("EInvoice ID: " + response.Data.data.id);
+        Console.WriteLine("E-Invoice ID: " + response.Data.data.id);
     }
     else
     {

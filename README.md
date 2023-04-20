@@ -307,26 +307,11 @@ using AvvaMobile.Core.Parasut;
 
 var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", "COMPANY ID");
 
-var invoiceID = "123456";
-
-var model = new InvoicePaymentRequest
-{
-    data = new InvoicePaymentRequest_Data
-    {
-        attributes = new InvoicePaymentRequest_Data_Attributes
-        {
-            description = "Ödeme açıklaması",
-            account_id = 1009901,
-            date = "2023-04-13",
-            amount = new decimal(123.44)
-        }
-    }
-};
-
-var response = await parasut.InvoicePayment.Pay(model, invoiceID);
+var response = await parasut.EInvoiceInbox.List("VERGİ NUMARASI");
 if (response.IsSuccess)
 {
-    Console.WriteLine("Payment ID: " + response.Data.data.id);
+    Console.WriteLine("E-Invoice Inbox Count: " + response.Data.data.Count);
+    Console.WriteLine("E-Invoice Inbox Name: " + response.Data.data.e_invoice_address);
 }
 else
 {
@@ -341,15 +326,13 @@ using AvvaMobile.Core.Parasut;
 
 var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", "COMPANY ID");
 
-var invoiceID = "123456";
-
 var model = new EInvoiceCreateRequest
 {
     data = new EInvoiceCreateRequest_Data
     {
         attributes = new EInvoiceCreateRequest_Data_Attributes
         {
-            note = "Fatura Notu Test",
+            note = "Fatura Notu",
             scenario = "commercial",
             to = "urn:mail:defaultpk@avvamobile.com"
         },
@@ -359,7 +342,7 @@ var model = new EInvoiceCreateRequest
             {
                 data = new EInvoiceCreateRequest_Data_Relationships_Invoice_Data
                 {
-                    id = "155049858" // Paraşütte daha önce eklenmiş ve e-faturaya dönüştürülecek olan faturanın ID'si.
+                    id = "FATURA NO" // Paraşütte daha önce eklenmiş ve e-faturaya dönüştürülecek olan faturanın ID'si.
                 }
             }
         }
@@ -369,7 +352,7 @@ var model = new EInvoiceCreateRequest
 var response = await parasut.EInvoice.Create(model);
 if (response.IsSuccess)
 {
-    Console.WriteLine("EInvoice ID: " + response.Data.data.id);
+    Console.WriteLine("E-Invoice ID: " + response.Data.data.id);
 }
 else
 {
