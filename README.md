@@ -326,8 +326,6 @@ using AvvaMobile.Core.Parasut;
 
 var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", "COMPANY ID");
 
-var invoiceID = "123456";
-
 var model = new EInvoiceCreateRequest
 {
     data = new EInvoiceCreateRequest_Data
@@ -344,7 +342,7 @@ var model = new EInvoiceCreateRequest
             {
                 data = new EInvoiceCreateRequest_Data_Relationships_Invoice_Data
                 {
-                    id = "155049858" // Paraşütte daha önce eklenmiş ve e-faturaya dönüştürülecek olan faturanın ID'si.
+                    id = "FATURA NO" // Paraşütte daha önce eklenmiş ve e-faturaya dönüştürülecek olan faturanın ID'si.
                 }
             }
         }
