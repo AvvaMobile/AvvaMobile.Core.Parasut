@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AvvaMobile.Core.Parasut.Models.Responses;
+namespace AvvaMobile.Core.Parasut;
 
 public class CustomerResponse
 {

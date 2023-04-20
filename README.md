@@ -43,9 +43,6 @@ NuGet kullanımı için [https://www.nuget.org/packages/AvvaMobile.Core.Parasut]
 Geliştirmeye başlamadan önce aşağıdaki namespace tanımını yapmalısınız.
 ```csharp
 using AvvaMobile.Core.Parasut;
-using AvvaMobile.Core.Parasut.Models.Requests;
-using AvvaMobile.Core.Parasut.Models.Responses;
-using AvvaMobile.Core.Parasut.Services;
 ```
 ## Servislerden Dönen Envelope (Zarf) Kullanımı
 Tüm servislerden ortak olarak bir Envelope objesi dönmektedir. Bu obje size servisin çalışma sonucu hakkında meta data bilgiler içermekte ve dönecek olan veriyi de sarmalamaktadır.
@@ -66,15 +63,15 @@ public class ServiceResult<T>
 ```
 
 ## Örnekler
-- [Paraşüt Nesnesini Yaratmak](https://github.com/AvvaMobile/AvvaMobile.Core.Parasut/edit/develop/README.md#parasut-nesnesini-yaratmak)
-- [Token Almak](https://github.com/AvvaMobile/AvvaMobile.Core.Parasut/blob/develop/README.md#token-almak)
-- [Yeni Müşteri Yaratmak](https://github.com/AvvaMobile/AvvaMobile.Core.Parasut/blob/develop/README.md#yeni-m%C3%BC%C5%9Fteri-yaratmak)
-- [Müşteriye Ödeme Eklemek](https://github.com/AvvaMobile/AvvaMobile.Core.Parasut/edit/develop/README.md#m%C3%BC%C5%9Fteriye-%C3%B6deme-eklemek)
-- [Yeni Ürün Eklemek](https://github.com/AvvaMobile/AvvaMobile.Core.Parasut/edit/develop/README.md#yeni-%C3%BCr%C3%BCn-eklemek)
-- [Müşteriye Fatura Kesmek](https://github.com/AvvaMobile/AvvaMobile.Core.Parasut/edit/develop/README.md#m%C3%BC%C5%9Fteriye-fatura-kesmek)
-- [Faturaya Ödeme Eklemek](https://github.com/AvvaMobile/AvvaMobile.Core.Parasut/edit/develop/README.md#faturaya-%C3%B6deme-eklemek)
-- [Müşterinin E-Fatura Gelen Kutusu Sorgulaması Yapmak](https://github.com/AvvaMobile/AvvaMobile.Core.Parasut/edit/develop/README.md#m%C3%BC%C5%9Fterinin-e-fatura-gelen-kutusu-sorgulamas%C4%B1-yapmak)
-- [Faturayı E-Faturaya Dönüştür](https://github.com/AvvaMobile/AvvaMobile.Core.Parasut/edit/develop/README.md#faturay%C4%B1-e-faturaya-d%C3%B6n%C3%BC%C5%9Ft%C3%BCr)
+- [Paraşüt Nesnesini Yaratmak](#parasut-nesnesini-yaratmak)
+- [Token Almak](#token-almak)
+- [Yeni Müşteri Yaratmak](#yeni-m%C3%BC%C5%9Fteri-yaratmak)
+- [Müşteriye Ödeme Eklemek](#m%C3%BC%C5%9Fteriye-%C3%B6deme-eklemek)
+- [Yeni Ürün Eklemek](#yeni-%C3%BCr%C3%BCn-eklemek)
+- [Müşteriye Fatura Kesmek](#m%C3%BC%C5%9Fteriye-fatura-kesmek)
+- [Faturaya Ödeme Eklemek](#faturaya-%C3%B6deme-eklemek)
+- [Müşterinin E-Fatura Gelen Kutusu Sorgulaması Yapmak](#m%C3%BC%C5%9Fterinin-e-fatura-gelen-kutusu-sorgulamas%C4%B1-yapmak)
+- [Faturayı E-Faturaya Dönüştür](#faturay%C4%B1-e-faturaya-d%C3%B6n%C3%BC%C5%9Ft%C3%BCr)
 
 
 ## Parasut Nesnesini Yaratmak
@@ -85,9 +82,6 @@ var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", 
 ## Token Almak
 ```csharp
 using AvvaMobile.Core.Parasut;
-using AvvaMobile.Core.Parasut.Models.Requests;
-using AvvaMobile.Core.Parasut.Models.Responses;
-using AvvaMobile.Core.Parasut.Services;
 
 var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", "COMPANY ID");
 
@@ -105,9 +99,6 @@ else
 ## Yeni Müşteri Yaratmak
 ```csharp
 using AvvaMobile.Core.Parasut;
-using AvvaMobile.Core.Parasut.Models.Requests;
-using AvvaMobile.Core.Parasut.Models.Responses;
-using AvvaMobile.Core.Parasut.Services;
 
 var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", "COMPANY ID");
 
@@ -143,9 +134,6 @@ else
 ## Müşteriye Ödeme Eklemek
 ```csharp
 using AvvaMobile.Core.Parasut;
-using AvvaMobile.Core.Parasut.Models.Requests;
-using AvvaMobile.Core.Parasut.Models.Responses;
-using AvvaMobile.Core.Parasut.Services;
 
 var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", "COMPANY ID");
 
@@ -179,9 +167,6 @@ else
 ## Yeni Ürün Eklemek
 ```csharp
 using AvvaMobile.Core.Parasut;
-using AvvaMobile.Core.Parasut.Models.Requests;
-using AvvaMobile.Core.Parasut.Models.Responses;
-using AvvaMobile.Core.Parasut.Services;
 
 var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", "COMPANY ID");
 
@@ -217,9 +202,6 @@ Fatura kesme işlemi biraz karışık olması sebebiyle, gönderilecek parametle
 
 ```csharp
 using AvvaMobile.Core.Parasut;
-using AvvaMobile.Core.Parasut.Models.Requests;
-using AvvaMobile.Core.Parasut.Models.Responses;
-using AvvaMobile.Core.Parasut.Services;
 
 var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", "COMPANY ID");
 
@@ -287,9 +269,6 @@ else
 ## Faturaya Ödeme Eklemek
 ```csharp
 using AvvaMobile.Core.Parasut;
-using AvvaMobile.Core.Parasut.Models.Requests;
-using AvvaMobile.Core.Parasut.Models.Responses;
-using AvvaMobile.Core.Parasut.Services;
 
 var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", "COMPANY ID");
 
@@ -325,9 +304,6 @@ Bir müşteriye E-Fatura kesmeden önce mutlaka o müşterinin e-fatura abonesi 
 
 ```csharp
 using AvvaMobile.Core.Parasut;
-using AvvaMobile.Core.Parasut.Models.Requests;
-using AvvaMobile.Core.Parasut.Models.Responses;
-using AvvaMobile.Core.Parasut.Services;
 
 var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", "COMPANY ID");
 
@@ -362,9 +338,6 @@ else
 
 ```csharp
 using AvvaMobile.Core.Parasut;
-using AvvaMobile.Core.Parasut.Models.Requests;
-using AvvaMobile.Core.Parasut.Models.Responses;
-using AvvaMobile.Core.Parasut.Services;
 
 var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", "COMPANY ID");
 
