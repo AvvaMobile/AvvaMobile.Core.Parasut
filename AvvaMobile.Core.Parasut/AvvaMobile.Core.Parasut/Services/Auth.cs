@@ -1,7 +1,4 @@
-﻿using AvvaMobile.Core.Parasut.Models.Requests;
-using AvvaMobile.Core.Parasut.Models.Responses;
-
-namespace AvvaMobile.Core.Parasut.Services;
+﻿namespace AvvaMobile.Core.Parasut;
 
 public class Auth
 {

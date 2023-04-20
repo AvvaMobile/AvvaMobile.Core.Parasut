@@ -1,7 +1,4 @@
 ﻿using AvvaMobile.Core.Parasut;
-using AvvaMobile.Core.Parasut.Models.Requests;
-using AvvaMobile.Core.Parasut.Models.Responses;
-using AvvaMobile.Core.Parasut.Services;
 
 // Bu bilgileri nereden alacağınız konusundaki bilgiler için lütfen https://github.com/AvvaMobile/AvvaMobile.Core.Parasut adresini ziyaret ediniz.
 var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", "COMPANY ID");

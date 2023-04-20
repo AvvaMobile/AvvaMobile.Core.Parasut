@@ -1,4 +1,4 @@
-﻿namespace AvvaMobile.Core.Parasut.Models.Requests;
+﻿namespace AvvaMobile.Core.Parasut;
 
 public class EInvoiceCreateRequest
 {

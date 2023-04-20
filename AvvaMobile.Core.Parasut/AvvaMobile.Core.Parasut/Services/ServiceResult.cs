@@ -1,4 +1,4 @@
-﻿namespace AvvaMobile.Core.Parasut.Services;
+﻿namespace AvvaMobile.Core.Parasut;
 
 public class ServiceResult
 {

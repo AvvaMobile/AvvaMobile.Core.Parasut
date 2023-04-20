@@ -1,6 +1,4 @@
-﻿using AvvaMobile.Core.Parasut.Services;
-
-namespace AvvaMobile.Core.Parasut.Models.Requests;
+﻿namespace AvvaMobile.Core.Parasut;
 
 public class ProductRequest
 {
