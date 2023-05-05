@@ -16,7 +16,7 @@
 		<RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
 		<RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
 		<EnableNETAnalyzers>False</EnableNETAnalyzers>
-		<Version>1.1.1</Version>
+		<Version>1.1.2</Version>
 		<GenerateDocumentationFile>False</GenerateDocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>

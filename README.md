@@ -72,6 +72,7 @@ public class ServiceResult<T>
 - [Faturaya Ödeme Eklemek](#faturaya-%C3%B6deme-eklemek)
 - [Müşterinin E-Fatura Gelen Kutusu Sorgulaması Yapmak](#m%C3%BC%C5%9Fterinin-e-fatura-gelen-kutusu-sorgulamas%C4%B1-yapmak)
 - [Faturayı E-Faturaya Dönüştür](#faturay%C4%B1-e-faturaya-d%C3%B6n%C3%BC%C5%9Ft%C3%BCr)
+- [Faturayı E-Arşive Dönüştür](#faturay%C4%B1-e-ar%C5%9Five-d%C3%B6n%C3%BC%C5%9Ft%C3%BCr)
 
 
 ## Parasut Nesnesini Yaratmak
@@ -320,6 +321,9 @@ else
 ```
 
 ## Faturayı E-Faturaya Dönüştür
+Eğer müşterinin bir e-fatura üyeliği var ise bu yöntemi kullanarak e-faturaya dönüştürebilirsiniz. Eğer müşterinin e-fatura üyeliği yok ise e-arşiv fatura kesmelisiniz.
+
+e-Fatura / e-Arşiv / e-Smm oluşturma işlemi synchronous değildir. Yani istek arka planda yerine getirilir. Bu yüzden e-Fatura / e-Arşiv / e-Smm oluşturma endpoint'leri cevap olarak oluşturma işleminin durumunu takip edebileceğiniz bir işlem id'si döner. Bu işlem id'sini sorgulama endpoint'inde belirli aralıklarla(id'nin kullanım süresi oluşturulduktan sonra 15 dakikadır) kullanıp oluşturma işleminin durumunu takip etmeniz gerekmektedir.
 
 ```csharp
 using AvvaMobile.Core.Parasut;
@@ -353,6 +357,69 @@ var response = await parasut.EInvoice.Create(model);
 if (response.IsSuccess)
 {
     Console.WriteLine("E-Invoice ID: " + response.Data.data.id);
+}
+else
+{
+    Console.WriteLine("ERROR: " + response.Message);
+}
+```
+
+## Faturayı E-Arşiv Faturasına Dönüştür
+Bu bölümden yalnızca e-arşiv faturası kesebilirsiniz. Eğer müşterinin e-fatura üyeliği var ise yukarıdaki yöntemi kullanmalısınız.
+
+e-Fatura / e-Arşiv / e-Smm oluşturma işlemi synchronous değildir. Yani istek arka planda yerine getirilir. Bu yüzden e-Fatura / e-Arşiv / e-Smm oluşturma endpoint'leri cevap olarak oluşturma işleminin durumunu takip edebileceğiniz bir işlem id'si döner. Bu işlem id'sini sorgulama endpoint'inde belirli aralıklarla(id'nin kullanım süresi oluşturulduktan sonra 15 dakikadır) kullanıp oluşturma işleminin durumunu takip etmeniz gerekmektedir.
+
+```csharp
+using AvvaMobile.Core.Parasut;
+
+var model = new EArchiveCreateRequest
+{
+    data = new EArchiveCreateRequest_Data
+    {
+        attributes = new EArchiveCreateRequest_Data_Attributes
+        {
+            note = "Fatura Notu"
+        },
+        relationships = new EArchiveCreateRequest_Data_Relationships
+        {
+            sales_invoice = new EArchiveCreateRequest_Data_Relationships_Invoice
+            {
+                data = new EArchiveCreateRequest_Data_Relationships_Invoice_Data
+                {
+                    id = "FATURA NO" // Paraşütte daha önce eklenmiş ve e-faturaya dönüştürülecek olan faturanın ID'si.
+                }
+            }
+        }
+    }
+};
+
+var response = await parasut.EArchive.Create(model);
+if (response.IsSuccess)
+{
+    Console.WriteLine("E-Archive ID: " + response.Data.data.id);
+}
+else
+{
+    Console.WriteLine("ERROR: " + response.Message);
+}
+```
+
+## Fatura İşlem Durumunu Sorgulama
+E-Fatura veya E-Arşiv olarak resmileştirilmiş olan bir faturanın, durumunu sorgulamak için kullanılır.
+
+```csharp
+using AvvaMobile.Core.Parasut;
+
+var model = new TrackableJobRequest
+{
+    id = 123, // Trackable Job ID'si yani e-arşiv veya e-fatura kesme işlemi sonucunda dönen ID.
+    company_id = 456 // Şirket ID'si
+};
+
+var response = await parasut.TrackableJob.GetStatus(model);
+if (response.IsSuccess)
+{
+    Console.WriteLine("Status: " + response.Data.data.attributes.status);
 }
 else
 {
