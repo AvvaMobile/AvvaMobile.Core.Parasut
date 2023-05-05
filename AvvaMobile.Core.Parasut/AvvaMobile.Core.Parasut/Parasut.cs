@@ -14,6 +14,8 @@ public class Parasut
         CustomerPayment = new CustomerPaymentService(Auth, ParasutBaseUrl);
         EInvoiceInbox = new EInvoiceInboxService(Auth, ParasutBaseUrl);
         EInvoice = new EInvoiceService(Auth, ParasutBaseUrl);
+        EArchive = new EArchiveService(Auth, ParasutBaseUrl);
+        TrackableJob = new TrackableJobService(Auth, ParasutBaseUrl);
     }
 
     private string ParasutBaseDomain { get; set; }
@@ -27,4 +29,6 @@ public class Parasut
     public CustomerPaymentService CustomerPayment { get; set; }
     public EInvoiceInboxService EInvoiceInbox { get; set; }
     public EInvoiceService EInvoice { get; set; }
+    public EArchiveService EArchive { get; set; }
+    public TrackableJobService TrackableJob { get; set; }
 }

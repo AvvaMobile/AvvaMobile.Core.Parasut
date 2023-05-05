@@ -3,18 +3,6 @@
 // Bu bilgileri nereden alacağınız konusundaki bilgiler için lütfen https://github.com/AvvaMobile/AvvaMobile.Core.Parasut adresini ziyaret ediniz.
 var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", "COMPANY ID");
 
-//await Token();
-//await CustomerCreate();
-//await CustomerEdit();
-//await CustomerPayment();
-//await ProductCreate();
-//await ProductEdit();
-//await InvoiceCreate();
-//await InvoiceEdit();
-//await InvoicePay();
-//await EInvoiceInboxList();
-//await EInvoiceCreate();
-
 async Task Token()
 {
     var response = await parasut.Auth.Token();
@@ -78,7 +66,6 @@ async Task CustomerEdit()
                 district = "Merkez"
             }
         }
-
     };
 
     var response = await parasut.Customer.Edit(model);
@@ -381,4 +368,55 @@ async Task EInvoiceCreate()
     }
 }
 
-Console.ReadKey();
+async Task EArchiveCreate()
+{
+    var model = new EArchiveCreateRequest
+    {
+        data = new EArchiveCreateRequest_Data
+        {
+            attributes = new EArchiveCreateRequest_Data_Attributes
+            {
+                note = "Fatura Notu"
+            },
+            relationships = new EArchiveCreateRequest_Data_Relationships
+            {
+                sales_invoice = new EArchiveCreateRequest_Data_Relationships_Invoice
+                {
+                    data = new EArchiveCreateRequest_Data_Relationships_Invoice_Data
+                    {
+                        id = "FATURA NO" // Paraşütte daha önce eklenmiş ve e-faturaya dönüştürülecek olan faturanın ID'si.
+                    }
+                }
+            }
+        }
+    };
+
+    var response = await parasut.EArchive.Create(model);
+    if (response.IsSuccess)
+    {
+        Console.WriteLine("E-Archive ID: " + response.Data.data.id);
+    }
+    else
+    {
+        Console.WriteLine("ERROR: " + response.Message);
+    }
+}
+
+async Task TrackableJobGetStatus()
+{
+    var model = new TrackableJobRequest
+    {
+        id = 123,
+        company_id = 456
+    };
+
+    var response = await parasut.TrackableJob.GetStatus(model);
+    if (response.IsSuccess)
+    {
+        Console.WriteLine("Status: " + response.Data.data.attributes.status);
+    }
+    else
+    {
+        Console.WriteLine("ERROR: " + response.Message);
+    }
+}
