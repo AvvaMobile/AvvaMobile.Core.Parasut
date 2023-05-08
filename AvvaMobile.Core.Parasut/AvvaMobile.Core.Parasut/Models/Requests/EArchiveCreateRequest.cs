@@ -8,7 +8,7 @@ public class EArchiveCreateRequest
 public class EArchiveCreateRequest_Data
 {
     public string id { get; set; }
-    public string type { get; set; } = "e_invoices";
+    public string type { get; set; } = "e_archives";
     public EArchiveCreateRequest_Data_Attributes attributes { get; set; }
     public EArchiveCreateRequest_Data_Relationships relationships { get; set; }
 }
