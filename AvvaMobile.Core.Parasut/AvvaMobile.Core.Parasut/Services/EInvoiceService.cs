@@ -10,9 +10,9 @@ public class EInvoiceService : ParasutBaseService
     /// Creates a invoice on Paraşüt.
     /// </summary>
     /// <returns></returns>
-    public async Task<ServiceResult<EInvoiceCreateResponse>> Create(EInvoiceCreateRequest invoice)
+    public async Task<ParasutServiceResult<EInvoiceCreateResponse>> Create(EInvoiceCreateRequest invoice)
     {
-        var result = new ServiceResult<EInvoiceCreateResponse>();
+        var result = new ParasutServiceResult<EInvoiceCreateResponse>();
 
         var nm = new NetworkManager(ParasutBaseUrl);
         nm.AddContentTypeJSONHeader();

@@ -12,7 +12,7 @@ public class ParasutServiceResult
     }
 }
 
-public class ServiceResult<T> : ParasutServiceResult
+public class ParasutServiceResult<T> : ParasutServiceResult
 {
     public T Data { get; set; }
 }

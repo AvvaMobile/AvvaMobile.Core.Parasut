@@ -24,9 +24,9 @@ public class Auth
     /// Paraşüt'e bağlanarak, ilgili kullanıcı için token yaratır.
     /// </summary>
     /// <returns></returns>
-    public async Task<ServiceResult<TokenResponse>> Token()
+    public async Task<ParasutServiceResult<TokenResponse>> Token()
     {
-        var result = new ServiceResult<TokenResponse>();
+        var result = new ParasutServiceResult<TokenResponse>();
 
         var nm = new NetworkManager(ParasutBaseDomain);
         nm.AddContentTypeJSONHeader();

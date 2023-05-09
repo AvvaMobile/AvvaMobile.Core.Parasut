@@ -10,9 +10,9 @@ public class CustomerService : ParasutBaseService
     /// Creates a customer on Paraşüt.
     /// </summary>
     /// <returns></returns>
-    public async Task<ServiceResult<CustomerResponse>> Create(CustomerRequest customer)
+    public async Task<ParasutServiceResult<CustomerResponse>> Create(CustomerRequest customer)
     {
-        var result = new ServiceResult<CustomerResponse>();
+        var result = new ParasutServiceResult<CustomerResponse>();
 
         var nm = new NetworkManager(ParasutBaseUrl);
         nm.AddContentTypeJSONHeader();
@@ -42,9 +42,9 @@ public class CustomerService : ParasutBaseService
     /// Edits a customer on Paraşüt.
     /// </summary>
     /// <returns></returns>
-    public async Task<ServiceResult<CustomerResponse>> Edit(CustomerRequest customer)
+    public async Task<ParasutServiceResult<CustomerResponse>> Edit(CustomerRequest customer)
     {
-        var result = new ServiceResult<CustomerResponse>();
+        var result = new ParasutServiceResult<CustomerResponse>();
 
         var nm = new NetworkManager(ParasutBaseUrl);
         nm.AddContentTypeJSONHeader();

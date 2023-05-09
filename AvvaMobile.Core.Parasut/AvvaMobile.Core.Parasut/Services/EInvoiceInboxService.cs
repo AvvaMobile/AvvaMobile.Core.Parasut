@@ -10,9 +10,9 @@ public class EInvoiceInboxService : ParasutBaseService
     /// VKN bilgisi verilmiş olan firmanın bir e-fatura gelen kutusu olup olmadığını sorgular.
     /// </summary>
     /// <returns></returns>
-    public async Task<ServiceResult<EInvoiceInboxResponse>> List(string vkn)
+    public async Task<ParasutServiceResult<EInvoiceInboxResponse>> List(string vkn)
     {
-        var result = new ServiceResult<EInvoiceInboxResponse>();
+        var result = new ParasutServiceResult<EInvoiceInboxResponse>();
 
         var nm = new NetworkManager(ParasutBaseUrl);
         nm.AddContentTypeJSONHeader();

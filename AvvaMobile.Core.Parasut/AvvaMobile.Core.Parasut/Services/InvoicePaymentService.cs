@@ -10,9 +10,9 @@ public class InvoicePaymentService : ParasutBaseService
     /// Creates a payment for an invoice on Paraşüt.
     /// </summary>
     /// <returns></returns>
-    public async Task<ServiceResult<InvoicePaymentResponse>> Pay(InvoicePaymentRequest payment, string invoiceId)
+    public async Task<ParasutServiceResult<InvoicePaymentResponse>> Pay(InvoicePaymentRequest payment, string invoiceId)
     {
-        var result = new ServiceResult<InvoicePaymentResponse>();
+        var result = new ParasutServiceResult<InvoicePaymentResponse>();
 
         var nm = new NetworkManager(ParasutBaseUrl);
         nm.AddContentTypeJSONHeader();
