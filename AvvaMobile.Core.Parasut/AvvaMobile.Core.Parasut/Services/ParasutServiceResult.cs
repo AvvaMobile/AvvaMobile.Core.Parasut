@@ -1,6 +1,6 @@
 ﻿namespace AvvaMobile.Core.Parasut;
 
-public class ServiceResult
+public class ParasutServiceResult
 {
     public bool IsSuccess { get; set; } = true;
     public string Message { get; set; }
@@ -12,7 +12,7 @@ public class ServiceResult
     }
 }
 
-public class ServiceResult<T> : ServiceResult
+public class ServiceResult<T> : ParasutServiceResult
 {
     public T Data { get; set; }
 }

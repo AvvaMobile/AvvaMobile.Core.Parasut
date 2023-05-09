@@ -1,6 +1,6 @@
 ﻿namespace AvvaMobile.Core.Parasut;
 
-public class EInvoiceService : BaseService
+public class EInvoiceService : ParasutBaseService
 {
     public EInvoiceService(Auth auth, string parasutBaseUrl) : base(auth, parasutBaseUrl)
     {

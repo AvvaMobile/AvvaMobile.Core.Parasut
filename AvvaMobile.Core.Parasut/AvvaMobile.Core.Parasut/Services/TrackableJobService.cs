@@ -1,6 +1,6 @@
 ﻿namespace AvvaMobile.Core.Parasut;
 
-public class TrackableJobService : BaseService
+public class TrackableJobService : ParasutBaseService
 {
     public TrackableJobService(Auth auth, string parasutBaseUrl) : base(auth, parasutBaseUrl)
     {

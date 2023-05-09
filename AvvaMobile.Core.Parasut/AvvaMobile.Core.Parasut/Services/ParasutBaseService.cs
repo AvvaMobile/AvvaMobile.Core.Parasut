@@ -1,11 +1,11 @@
 ﻿namespace AvvaMobile.Core.Parasut;
 
-public class BaseService
+public class ParasutBaseService
 {
     public string ParasutBaseUrl { get; set; }
     public Auth Auth { get; set; }
 
-    public BaseService(Auth auth, string parasutBaseUrl)
+    public ParasutBaseService(Auth auth, string parasutBaseUrl)
     {
         ParasutBaseUrl = parasutBaseUrl;
         Auth = auth;
