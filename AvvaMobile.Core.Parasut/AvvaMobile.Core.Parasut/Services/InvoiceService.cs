@@ -10,9 +10,9 @@ public class InvoiceService : ParasutBaseService
     /// Creates a invoice on Paraşüt.
     /// </summary>
     /// <returns></returns>
-    public async Task<ServiceResult<InvoiceResponse>> Create(InvoiceRequest invoice)
+    public async Task<ParasutServiceResult<InvoiceResponse>> Create(InvoiceRequest invoice)
     {
-        var result = new ServiceResult<InvoiceResponse>();
+        var result = new ParasutServiceResult<InvoiceResponse>();
 
         var nm = new NetworkManager(ParasutBaseUrl);
         nm.AddContentTypeJSONHeader();
@@ -42,9 +42,9 @@ public class InvoiceService : ParasutBaseService
     /// Edits a invoice on Paraşüt.
     /// </summary>
     /// <returns></returns>
-    public async Task<ServiceResult<InvoiceResponse>> Edit(InvoiceRequest invoice)
+    public async Task<ParasutServiceResult<InvoiceResponse>> Edit(InvoiceRequest invoice)
     {
-        var result = new ServiceResult<InvoiceResponse>();
+        var result = new ParasutServiceResult<InvoiceResponse>();
 
         var nm = new NetworkManager(ParasutBaseUrl);
         nm.AddContentTypeJSONHeader();

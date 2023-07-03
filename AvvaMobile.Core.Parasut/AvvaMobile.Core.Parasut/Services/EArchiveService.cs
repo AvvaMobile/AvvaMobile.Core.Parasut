@@ -10,9 +10,9 @@ public class EArchiveService : ParasutBaseService
     /// Creates a invoice on Paraşüt.
     /// </summary>
     /// <returns></returns>
-    public async Task<ServiceResult<EArchiveCreateResponse>> Create(EArchiveCreateRequest invoice)
+    public async Task<ParasutServiceResult<EArchiveCreateResponse>> Create(EArchiveCreateRequest invoice)
     {
-        var result = new ServiceResult<EArchiveCreateResponse>();
+        var result = new ParasutServiceResult<EArchiveCreateResponse>();
 
         var nm = new NetworkManager(ParasutBaseUrl);
         nm.AddContentTypeJSONHeader();

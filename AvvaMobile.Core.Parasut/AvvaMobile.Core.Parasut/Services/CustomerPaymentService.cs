@@ -10,9 +10,9 @@ public class CustomerPaymentService : ParasutBaseService
     /// Creates a payment for an customer on Paraşüt.
     /// </summary>
     /// <returns></returns>
-    public async Task<ServiceResult<CustomerPaymentResponse>> ContactDebitTransactions(CustomerPaymentRequest payment, string customerId)
+    public async Task<ParasutServiceResult<CustomerPaymentResponse>> ContactDebitTransactions(CustomerPaymentRequest payment, string customerId)
     {
-        var result = new ServiceResult<CustomerPaymentResponse>();
+        var result = new ParasutServiceResult<CustomerPaymentResponse>();
 
         var nm = new NetworkManager(ParasutBaseUrl);
         nm.AddContentTypeJSONHeader();

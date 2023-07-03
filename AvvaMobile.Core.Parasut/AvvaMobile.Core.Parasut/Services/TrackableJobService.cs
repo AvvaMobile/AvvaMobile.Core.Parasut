@@ -10,9 +10,9 @@ public class TrackableJobService : ParasutBaseService
     /// Get the status of a trackable job.
     /// </summary>
     /// <returns></returns>
-    public async Task<ServiceResult<TrackableJobResponse>> GetStatus(TrackableJobRequest request)
+    public async Task<ParasutServiceResult<TrackableJobResponse>> GetStatus(TrackableJobRequest request)
     {
-        var result = new ServiceResult<TrackableJobResponse>();
+        var result = new ParasutServiceResult<TrackableJobResponse>();
 
         var nm = new NetworkManager(ParasutBaseUrl);
         nm.AddContentTypeJSONHeader();
