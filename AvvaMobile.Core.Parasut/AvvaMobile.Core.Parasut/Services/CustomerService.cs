@@ -11,6 +11,24 @@ public class CustomerService : ParasutBaseService
     }
 
     /// <summary>
+    /// Tek bir müşteriyi/tedarikçiyi ID'si ile getirir.
+    /// </summary>
+    public Task<ParasutServiceResult<CustomerResponse>> Get(string id, CancellationToken cancellationToken = default)
+        => GetByIdAsync<CustomerResponse>($"/contacts/{Uri.EscapeDataString(id)}", cancellationToken);
+
+    /// <summary>
+    /// Bir müşteriyi/tedarikçiyi siler.
+    /// </summary>
+    public Task<ParasutServiceResult> Delete(string id, CancellationToken cancellationToken = default)
+        => DeleteAsync($"/contacts/{Uri.EscapeDataString(id)}", cancellationToken);
+
+    /// <summary>
+    /// Paraşüt'teki müşterileri/tedarikçileri listeler.
+    /// </summary>
+    public Task<ParasutServiceResult<ParasutListResponse<CustomerResponse_Data>>> List(CustomerListQuery? query = null, CancellationToken cancellationToken = default)
+        => ListAsync<CustomerResponse_Data>("/contacts", query, cancellationToken);
+
+    /// <summary>
     /// Creates a customer on Paraşüt.
     /// </summary>
     public async Task<ParasutServiceResult<CustomerResponse>> Create(CustomerRequest customer, CancellationToken cancellationToken = default)
