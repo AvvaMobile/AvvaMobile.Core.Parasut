@@ -183,14 +183,14 @@ if (!response.IsSuccess)
 | Servis | Metod | Açıklama |
 | --- | --- | --- |
 | `parasut.Auth` | `Token()` | Token alır (otomatik, elle çağırmak gerekmez) |
-| `parasut.Customer` | `Create()` · `Edit()` | Müşteri oluşturur / günceller |
-| `parasut.Product` | `Create()` · `Edit()` | Ürün oluşturur / günceller |
-| `parasut.Invoice` | `Create()` · `Edit()` | Satış faturası oluşturur / günceller |
-| `parasut.InvoicePayment` | `Pay()` | Faturaya ödeme ekler |
+| `parasut.Customer` | `Get()` · `List()` · `Create()` · `Edit()` · `Delete()` | Müşteri/tedarikçi işlemleri |
+| `parasut.Product` | `Get()` · `List()` · `Create()` · `Edit()` · `Delete()` | Ürün/hizmet işlemleri |
+| `parasut.Invoice` | `Get()` · `List()` · `Create()` · `Edit()` · `Delete()` | Satış faturası işlemleri |
+| `parasut.InvoicePayment` | `Pay()` · `Get()` · `Delete()` | Faturaya ödeme ekler, okur, siler |
 | `parasut.CustomerPayment` | `ContactDebitTransactions()` | Müşteriye ödeme/tahsilat ekler |
 | `parasut.EInvoiceInbox` | `List()` | E-fatura gelen kutusu sorgular |
-| `parasut.EInvoice` | `Create()` | Faturayı e-faturaya dönüştürür (özel firma gereksinimleri dahil) |
-| `parasut.EArchive` | `Create()` | Faturayı e-arşiv faturasına dönüştürür |
+| `parasut.EInvoice` | `Create()` · `Get()` · `GetPdf()` | Faturayı e-faturaya dönüştürür (özel firma gereksinimleri dahil), belgeyi ve PDF'ini getirir |
+| `parasut.EArchive` | `Create()` · `Get()` · `GetPdf()` | Faturayı e-arşiv faturasına dönüştürür, belgeyi ve PDF'ini getirir |
 | `parasut.TrackableJob` | `GetStatus()` | E-fatura/e-arşiv işlem durumunu sorgular |
 
 ---
@@ -207,6 +207,8 @@ using AvvaMobile.Core.Parasut;
 var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", "COMPANY ID");
 ```
 
+- [Kayıtları Listelemek](#kayıtları-listelemek)
+- [Tek Kayıt Getirmek ve Silmek](#tek-kayıt-getirmek-ve-silmek)
 - [Yeni Müşteri Yaratmak](#yeni-müşteri-yaratmak)
 - [Müşteriye Ödeme Eklemek](#müşteriye-ödeme-eklemek)
 - [Yeni Ürün Eklemek](#yeni-ürün-eklemek)
@@ -215,8 +217,56 @@ var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", 
 - [Müşterinin E-Fatura Gelen Kutusu Sorgulaması Yapmak](#müşterinin-e-fatura-gelen-kutusu-sorgulaması-yapmak)
 - [Faturayı E-Faturaya Dönüştürmek](#faturayı-e-faturaya-dönüştürmek)
 - [Faturayı E-Arşiv Faturasına Dönüştürmek](#faturayı-e-arşiv-faturasına-dönüştürmek)
+- [Resmileşen Belgeyi ve PDF'ini Getirmek](#resmileşen-belgeyi-ve-pdfini-getirmek)
 - [Fatura İşlem Durumunu Sorgulamak](#fatura-i̇şlem-durumunu-sorgulamak)
 - [Belirli Firmalar İçin Özel Gereksinimler (SGK vb.)](#belirli-firmalar-i̇çin-özel-gereksinimler-sgk-vb)
+
+### Kayıtları Listelemek
+
+`Customer`, `Product` ve `Invoice` servisleri filtre, sıralama ve sayfalama destekleyen `List()` metoduna sahiptir.
+
+```csharp
+var response = await parasut.Customer.List(new CustomerListQuery
+{
+    name = "Avva",
+    account_type = "customer",
+    Sort = "-created_at",
+    PageNumber = 1,
+    PageSize = 50
+});
+
+if (response.IsSuccess)
+{
+    Console.WriteLine("Toplam kayıt: " + response.Data?.meta?.total_count);
+    Console.WriteLine("Sayfa: " + response.Data?.meta?.current_page + "/" + response.Data?.meta?.total_pages);
+
+    foreach (var item in response.Data?.data ?? new List<CustomerResponse_Data>())
+    {
+        Console.WriteLine(item.id + " - " + item.attributes?.name);
+    }
+}
+```
+
+Her servisin kendi filtre sınıfı vardır: `CustomerListQuery` (name, email, tax_number, tax_office, city, account_type), `ProductListQuery` (name, code), `InvoiceListQuery` (issue_date, due_date, contact_id, invoice_id, invoice_series, item_type, print_status, payment_status).
+
+Tipli alanlar dışında bir filtre göndermeniz gerekirse `Filter()` kullanın:
+
+```csharp
+var query = new InvoiceListQuery { payment_status = "unpaid" };
+query.Filter("invoice_series", "A");
+```
+
+### Tek Kayıt Getirmek ve Silmek
+
+```csharp
+var customer = await parasut.Customer.Get("117650289");
+var deleted  = await parasut.Customer.Delete("117650289");
+
+if (deleted.IsSuccess)
+{
+    Console.WriteLine("Silindi.");
+}
+```
 
 ### Yeni Müşteri Yaratmak
 
@@ -510,6 +560,27 @@ else
     Console.WriteLine("HATA: " + response.Message);
 }
 ```
+
+### Resmileşen Belgeyi ve PDF'ini Getirmek
+
+Trackable job tamamlandıktan sonra oluşan e-fatura/e-arşiv belgesi okunabilir.
+
+```csharp
+var doc = await parasut.EArchive.Get("E-ARŞİV ID");
+if (doc.IsSuccess)
+{
+    Console.WriteLine("Fatura no: " + doc.Data?.data?.attributes?.invoice_number);
+    Console.WriteLine("Durum: " + doc.Data?.data?.attributes?.status);
+}
+
+var pdf = await parasut.EArchive.GetPdf("E-ARŞİV ID");
+if (pdf.IsSuccess)
+{
+    Console.WriteLine("PDF: " + pdf.Data?.data?.attributes?.url);
+}
+```
+
+Aynı metodlar `parasut.EInvoice` üzerinde de bulunur. PDF bağlantısı sürelidir; geçerlilik süresi `expires_at` alanındadır.
 
 ### Fatura İşlem Durumunu Sorgulamak
 
