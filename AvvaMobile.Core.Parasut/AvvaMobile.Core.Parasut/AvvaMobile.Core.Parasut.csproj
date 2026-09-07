@@ -13,6 +13,8 @@
 		<PackageProjectUrl>https://github.com/AvvaMobile/AvvaMobile.Core.Parasut</PackageProjectUrl>
 		<PackageIcon>avvamobile.png</PackageIcon>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<Copyright>Copyright (c) 2022-2026 Avva Mobile Enterprise Solutions</Copyright>
 		<RepositoryUrl>https://github.com/AvvaMobile/AvvaMobile.Core.Parasut</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>avvamobile;parasut;</PackageTags>
@@ -20,7 +22,7 @@
 		<RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
 		<RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
 		<EnableNETAnalyzers>False</EnableNETAnalyzers>
-		<Version>2.0.0</Version>
+		<Version>2.0.1</Version>
 		<GenerateDocumentationFile>False</GenerateDocumentationFile>
 		<!-- Sembol paketi ve kaynak kodu bağlantısı: paketin içine adım adım debug edilebilsin. -->
 		<IncludeSymbols>true</IncludeSymbols>
@@ -35,5 +37,6 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Include="..\..\README.md" Pack="True" PackagePath="\" />
+		<None Include="..\..\LICENSE" Pack="True" PackagePath="\" />
 	</ItemGroup>
 </Project>

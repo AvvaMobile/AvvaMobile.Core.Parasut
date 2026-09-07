@@ -7,6 +7,7 @@
 [![NuGet](https://img.shields.io/nuget/v/AvvaMobile.Core.Parasut.svg)](https://www.nuget.org/packages/AvvaMobile.Core.Parasut)
 [![Downloads](https://img.shields.io/nuget/dt/AvvaMobile.Core.Parasut.svg)](https://www.nuget.org/packages/AvvaMobile.Core.Parasut)
 ![.NET](https://img.shields.io/badge/.NET-6.0%20%7C%207.0%20%7C%208.0%20%7C%2010.0-512BD4)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 </div>
 
@@ -29,6 +30,7 @@ Paraşüt'ün orijinal API dokümanları: [apidocs.parasut.com](https://apidocs.
 - [Örnekler](#örnekler)
 - [1.1.x → 2.0.0 Geçiş Notları](#11x--200-geçiş-notları)
 - [Katkı ve İletişim](#katkı-ve-i̇letişim)
+- [Lisans](#lisans)
 
 ---
 
@@ -655,3 +657,11 @@ Desteğinize her zaman ihtiyacımız var. Geliştirme ekibine katılmak için <o
 - [@ocalesmer](https://www.github.com/ocalesmer)
 - [@cativ3](https://www.github.com/cativ3)
 - [@avvamobiledogukan](https://github.com/orgs/AvvaMobile/people/avvamobiledogukan)
+
+---
+
+## Lisans
+
+[MIT](LICENSE) — Copyright (c) 2022-2026 Avva Mobile Enterprise Solutions
+
+Ticari projeler dahil olmak üzere herkes ücretsiz kullanabilir, değiştirebilir ve dağıtabilir. Tek şart, telif bildirimi ile lisans metninin korunmasıdır. Yazılım "olduğu gibi" sunulur, herhangi bir garanti verilmez.
