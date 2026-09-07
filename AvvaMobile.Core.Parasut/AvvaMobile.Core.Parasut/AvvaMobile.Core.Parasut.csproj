@@ -1,33 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFrameworks>net6.0;net7.0;net8.0;net10.0</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<LangVersion>latest</LangVersion>
+		<CheckEolTargetFramework>false</CheckEolTargetFramework>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Title>Avva Mobile Paraşüt</Title>
 		<Authors>Avva Mobile Enterprise Solutions</Authors>
 		<Description>Paraşüt API ile kolay ve hızlı çalışmak için hazırlanmış paket.</Description>
 		<PackageProjectUrl>https://github.com/AvvaMobile/AvvaMobile.Core.Parasut</PackageProjectUrl>
 		<PackageIcon>avvamobile.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryUrl>https://github.com/AvvaMobile/AvvaMobile.Core.Parasut</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<PackageTags>avvamobile;</PackageTags>
+		<PackageTags>avvamobile;parasut;</PackageTags>
 		<NeutralLanguage>tr</NeutralLanguage>
 		<RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
 		<RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
 		<EnableNETAnalyzers>False</EnableNETAnalyzers>
-		<Version>1.1.6</Version>
+		<Version>1.2.0</Version>
 		<GenerateDocumentationFile>False</GenerateDocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="AvvaMobile.Core.NetworkManager" Version="1.0.12" />
+		<!-- Paket kodu Newtonsoft kullanmaz; 1.1.x'te transitive olarak gelen bu bağımlılığa
+		     güvenen tüketicilerin build'i kırılmasın diye referans korunuyor. -->
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
 	<ItemGroup>
-		<None Update="avvamobile.png">
-			<PackagePath>\</PackagePath>
+		<None Include="avvamobile.png" Pack="True" PackagePath="\">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<Pack>True</Pack>
 		</None>
+		<None Include="..\..\README.md" Pack="True" PackagePath="\" />
 	</ItemGroup>
 </Project>

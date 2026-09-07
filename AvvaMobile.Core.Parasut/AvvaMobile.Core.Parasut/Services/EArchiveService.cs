@@ -1,40 +1,28 @@
-﻿namespace AvvaMobile.Core.Parasut;
+namespace AvvaMobile.Core.Parasut;
 
 public class EArchiveService : ParasutBaseService
 {
-    public EArchiveService(Auth auth, string parasutBaseUrl) : base(auth, parasutBaseUrl)
+    public EArchiveService(Auth auth, string parasutBaseUrl) : this(auth, parasutBaseUrl, null)
+    {
+    }
+
+    public EArchiveService(Auth auth, string parasutBaseUrl, HttpClient? httpClient) : base(auth, parasutBaseUrl, httpClient)
     {
     }
 
     /// <summary>
-    /// Creates a invoice on Paraşüt.
+    /// Daha önce oluşturulmuş bir satış faturasını e-arşiv faturasına dönüştürür.
     /// </summary>
-    /// <returns></returns>
-    public async Task<ParasutServiceResult<EArchiveCreateResponse>> Create(EArchiveCreateRequest invoice)
+    public async Task<ParasutServiceResult<EArchiveCreateResponse>> Create(EArchiveCreateRequest invoice, CancellationToken cancellationToken = default)
     {
         var result = new ParasutServiceResult<EArchiveCreateResponse>();
 
-        var nm = new NetworkManager(ParasutBaseUrl);
-        nm.AddContentTypeJSONHeader();
-
-        var token = await Auth.Token();
-        if (!token.IsSuccess)
+        var token = await GetAccessTokenAsync(result, cancellationToken).ConfigureAwait(false);
+        if (token is null)
         {
-            result.SetError("Token alınamadı.");
             return result;
         }
-        nm.AddBearerToken(token.Data.access_token);
 
-        var httpResponse = await nm.PostAsync<EArchiveCreateResponse>("/e_archives", invoice);
-        if (httpResponse.IsSuccess)
-        {
-            result.Data = httpResponse.Data;
-        }
-        else
-        {
-            result.SetError(httpResponse.Message);
-        }
-
-        return result;
+        return await Http.PostAsync<EArchiveCreateResponse>("/e_archives", invoice, token, cancellationToken).ConfigureAwait(false);
     }
 }

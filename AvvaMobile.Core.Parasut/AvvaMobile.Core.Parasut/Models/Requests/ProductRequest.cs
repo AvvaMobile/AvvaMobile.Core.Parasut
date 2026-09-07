@@ -2,14 +2,14 @@
 
 public class ProductRequest
 {
-    public ProductRequest_Data data { get; set; }
+    public ProductRequest_Data? data { get; set; }
 }
 
 public class ProductRequest_Data
 {
-    public string id { get; set; }
+    public string? id { get; set; }
     public string type { get; set; } = "products";
-    public ProductRequest_DataAttributes attributes { get; set; }
+    public ProductRequest_DataAttributes? attributes { get; set; }
 }
 
 public class ProductRequest_DataAttributes
@@ -17,12 +17,12 @@ public class ProductRequest_DataAttributes
     /// <summary>
     /// Ürün/hizmet kodu
     /// </summary>
-    public string code { get; set; }
+    public string? code { get; set; }
 
     /// <summary>
     /// Ürün/hizmet ismi
     /// </summary>
-    public string name { get; set; }
+    public string? name { get; set; }
 
     /// <summary>
     /// KDV oranı
@@ -52,7 +52,7 @@ public class ProductRequest_DataAttributes
     /// <summary>
     /// Birim
     /// </summary>
-    public string unit { get; set; }
+    public string? unit { get; set; }
 
     /// <summary>
     /// ÖİV oranı
@@ -91,7 +91,7 @@ public class ProductRequest_DataAttributes
     /// <summary>
     /// Ürünün GTIP kodu - https://uygulama.gtb.gov.tr/Tara adresinden öğrenebilirsiniz
     /// </summary>
-    public string gtip { get; set; }
+    public string? gtip { get; set; }
 
-    public string barcode { get; set; }
+    public string? barcode { get; set; }
 }

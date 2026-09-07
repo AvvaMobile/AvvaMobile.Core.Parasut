@@ -2,14 +2,14 @@
 
 public class InvoicePaymentRequest
 {
-    public InvoicePaymentRequest_Data data { get; set; }
+    public InvoicePaymentRequest_Data? data { get; set; }
 }
 
 public class InvoicePaymentRequest_Data
 {
-    public string id { get; set; }
+    public string? id { get; set; }
     public string type { get; set; } = "payments";
-    public InvoicePaymentRequest_Data_Attributes attributes { get; set; }
+    public InvoicePaymentRequest_Data_Attributes? attributes { get; set; }
 }
 
 public class InvoicePaymentRequest_Data_Attributes
@@ -17,7 +17,7 @@ public class InvoicePaymentRequest_Data_Attributes
     /// <summary>
     /// Ödeme/Tahsilat Açıklaması
     /// </summary>
-    public string description { get; set; }
+    public string? description { get; set; }
 
     /// <summary>
     /// Kasa veya Banka - Bu parametre ayrıca ödemenin/tahsilatın hangi döviz kuru ile yapılacağını belirler.
@@ -27,7 +27,7 @@ public class InvoicePaymentRequest_Data_Attributes
     /// <summary>
     /// Ödeme/Tahsilat tarihi
     /// </summary>
-    public string date { get; set; }
+    public string? date { get; set; }
 
     /// <summary>
     /// Ödeme/Tahsilat tutarı

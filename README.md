@@ -1,109 +1,228 @@
-
+<div align="center">
 
 # Paraşüt
 
-Geliştiriciler için Paraşüt API'ları ile uğraşmadan, kolay ve hızlı şekilde kullanabilmelerini sağlamak amacıyla geliştirilmiştir.
+**Paraşüt API'ı ile uğraşmadan, kolay ve hızlı çalışmanızı sağlayan .NET paketi.**
 
-Paraşüt'ün orijinal API dokümanlarına ulaşmak için [https://apidocs.parasut.com](https://apidocs.parasut.com) adresini kullanabilirsiniz.
+[![NuGet](https://img.shields.io/nuget/v/AvvaMobile.Core.Parasut.svg)](https://www.nuget.org/packages/AvvaMobile.Core.Parasut)
+[![Downloads](https://img.shields.io/nuget/dt/AvvaMobile.Core.Parasut.svg)](https://www.nuget.org/packages/AvvaMobile.Core.Parasut)
+![.NET](https://img.shields.io/badge/.NET-6.0%20%7C%207.0%20%7C%208.0%20%7C%2010.0-512BD4)
+
+</div>
+
+Geliştiricilerin Paraşüt API'larını düşük seviyede uğraşmadan kullanabilmesi için hazırlanmıştır. Kimlik doğrulama, token yönetimi, serileştirme ve hata çözümlemesi paket tarafından halledilir; siz yalnızca iş modelinizi doldurup metodu çağırırsınız.
+
+Paraşüt'ün orijinal API dokümanları: [apidocs.parasut.com](https://apidocs.parasut.com)
+
+---
+
+## İçindekiler
+
+- [Kurulum](#kurulum)
+- [Gereksinimler](#gereksinimler)
+- [Gerekli Bilgiler](#gerekli-bilgiler)
+- [Hızlı Başlangıç](#hızlı-başlangıç)
+- [Paraşüt Nesnesini Yaratmak](#paraşüt-nesnesini-yaratmak)
+- [Token Yönetimi](#token-yönetimi)
+- [Servis Sonucu (Envelope)](#servis-sonucu-envelope)
+- [Desteklenen Servisler](#desteklenen-servisler)
+- [Örnekler](#örnekler)
+- [1.1.x → 1.2.0 Geçiş Notları](#11x--120-geçiş-notları)
+- [Katkı ve İletişim](#katkı-ve-i̇letişim)
+
+---
+
+## Kurulum
+
+```bash
+dotnet add package AvvaMobile.Core.Parasut
+```
+
+NuGet paket sayfası: [nuget.org/packages/AvvaMobile.Core.Parasut](https://www.nuget.org/packages/AvvaMobile.Core.Parasut)
+
+Geliştirmeye başlamadan önce namespace tanımını yapın:
+
+```csharp
+using AvvaMobile.Core.Parasut;
+```
+
+## Gereksinimler
+
+`net6.0`, `net7.0`, `net8.0` ve `net10.0` hedeflerini destekler.
+
+Paketin kendi kodu **harici bir bağımlılık kullanmaz** — HTTP çağrıları `HttpClient`, JSON işlemleri `System.Text.Json` ile yapılır.
 
 ## Gerekli Bilgiler
 
-Bu paket ile çalışmaya başlamadan önce mutlaka aşağıdaki bilgilere sahip olmanız gerekmektedir. Bilgileri Paraşüt destek ekibinden edinebilirsiniz.
+Çalışmaya başlamadan önce aşağıdaki beş bilgiye sahip olmanız gerekir.
 
-`Company ID`: Bu bilgiyi kendinizde Paraşüt ekranlarındaki adres satırından edinebilirsiniz. Örnek olarak "https://uygulama.parasut.com/123456/" adresindeki "123456" sizin firma numaranızdır. Eğer numarayı bulmakta zorluk yaşıyorsanız yine Paraşüt destek ekibi size bu bilgiyi verecektir.
+| Bilgi | Nereden alınır |
+| --- | --- |
+| **Company ID** | Paraşüt ekranlarındaki adres satırından. Örneğin `https://uygulama.parasut.com/123456/` adresinde firma numaranız `123456`'dır. Bulmakta zorlanırsanız Paraşüt destek ekibi verecektir. |
+| **Username** | Paraşüt'e giriş yaptığınız kullanıcı olabilir; ancak **önerimiz API için ayrı bir kullanıcı oluşturmanızdır**. |
+| **Password** | API bağlantısında kullanacağınız kullanıcının parolası. |
+| **Client ID** | Paraşüt destek ekibinden. |
+| **Client Secret** | Paraşüt destek ekibinden. |
 
-`Username`: Bu bilgi halihazırda Paraşüt'e giriş yapmak için kullandığınız kullanıcı olabilir ancak önerimiz sadece API için ayrı bir kullanıcı olurşturmanızdır.
+## Hızlı Başlangıç
 
-`Password`: API bağlantısında kullanacağınız kullanıcının parolasıdır.
-
-`Client ID`: Bu bilgiyi Paraşüt destek ekibinden edinebilirsiniz.
-
-`Client Secret`: Bu bilgiyi Paraşüt destek ekibinden edinebilirsiniz.
-
-## Örnekler
-https://github.com/AvvaMobile/AvvaMobile.Core.Parasut ortamındaki Console projesi (AvvaMobile.Core.Parasut.Sample) içerisinde her bir metod için kullanım örnekleri bulunmaktadır. Her metodun kendine özel parametreleri olduğu için sırayla kullanarak incelemeniz önerilir.
-
-
-## Geliştirme Ekibine Katılın
-
-Desteğinize her zaman ihtiyacımız var. Geliştirme ekibine katılmak için lütfen opensource@avvamobile.com e-posta adresinden bizimle iletişime geçin.
-
-## Geliştiriciler
-
-- [@jackmuratyilmaz](https://www.github.com/jackmuratyilmaz)
-- [@Onurryilmazz](https://www.github.com/Onurryilmazz)
-- [@ocalesmer](https://www.github.com/ocalesmer)
-- [@cativ3](https://www.github.com/cativ3)
-- [@avvamobiledogukan](https://github.com/orgs/AvvaMobile/people/avvamobiledogukan)
-
-## NuGet Paketi
-NuGet kullanımı için [https://www.nuget.org/packages/AvvaMobile.Core.Parasut](https://www.nuget.org/packages/AvvaMobile.Core.Parasut) adresini ziyaret ediniz.
-
-## Namespace
-Geliştirmeye başlamadan önce aşağıdaki namespace tanımını yapmalısınız.
 ```csharp
 using AvvaMobile.Core.Parasut;
-```
-## Servislerden Dönen Envelope (Zarf) Kullanımı
-Tüm servislerden ortak olarak bir Envelope objesi dönmektedir. Bu obje size servisin çalışma sonucu hakkında meta data bilgiler içermekte ve dönecek olan veriyi de sarmalamaktadır.
 
-**IsSuccess**: Servis çalıştıktan sonra başsarıyla tamamlandı ise true döner. Eğer bir hata oluşmuş ise false döner.
+var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", "COMPANY ID");
 
-**Message**: Eğer serviste bir hata oluşmuş ise hatanın mesajını döndürür.
-
-**Data**: Servis çağırırken hangi tipte olacağı belirtilir ise o tipte veriyi döndürür.
-
-```csharp
-public class ServiceResult<T>
+var model = new CustomerRequest
 {
-    public bool IsSuccess { get; set; }
-    public string Message { get; set; }
-    public T Data { get; set; }
-}
-```
+    data = new CustomerRequest_Data
+    {
+        attributes = new CustomerRequest_Data_Attributes { name = "Örnek Müşteri" }
+    }
+};
 
-## Örnekler
-- [Paraşüt Nesnesini Yaratmak](#parasut-nesnesini-yaratmak)
-- [Token Almak](#token-almak)
-- [Yeni Müşteri Yaratmak](#yeni-m%C3%BC%C5%9Fteri-yaratmak)
-- [Müşteriye Ödeme Eklemek](#m%C3%BC%C5%9Fteriye-%C3%B6deme-eklemek)
-- [Yeni Ürün Eklemek](#yeni-%C3%BCr%C3%BCn-eklemek)
-- [Müşteriye Fatura Kesmek](#m%C3%BC%C5%9Fteriye-fatura-kesmek)
-- [Faturaya Ödeme Eklemek](#faturaya-%C3%B6deme-eklemek)
-- [Müşterinin E-Fatura Gelen Kutusu Sorgulaması Yapmak](#m%C3%BC%C5%9Fterinin-e-fatura-gelen-kutusu-sorgulamas%C4%B1-yapmak)
-- [Faturayı E-Faturaya Dönüştür](#faturay%C4%B1-e-faturaya-d%C3%B6n%C3%BC%C5%9Ft%C3%BCr)
-- [Faturayı E-Arşive Dönüştür](#faturay%C4%B1-e-ar%C5%9Five-d%C3%B6n%C3%BC%C5%9Ft%C3%BCr)
-
-
-## Parasut Nesnesini Yaratmak
-```csharp
-var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", "COMPANY ID");
-```
-
-## Token Almak
-```csharp
-using AvvaMobile.Core.Parasut;
-
-var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", "COMPANY ID");
-
-var response = await parasut.Auth.Token();
+var response = await parasut.Customer.Create(model);
 if (response.IsSuccess)
 {
-    Console.WriteLine("access_token: " + response.Data.access_token);
+    Console.WriteLine("Customer ID: " + response.Data?.data?.id);
 }
 else
 {
-    Console.WriteLine("ERROR: " + response.Message);
+    Console.WriteLine("HATA: " + response.Message);
 }
 ```
 
-## Yeni Müşteri Yaratmak
+Token almanıza gerek yoktur — her metod gerektiğinde token'ı kendisi alır.
+
+## Paraşüt Nesnesini Yaratmak
+
+```csharp
+var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", "COMPANY ID");
+```
+
+`Parasut` nesnesi token önbelleğini içinde tuttuğu için **uygulama ömrü boyunca tek örnek (singleton) olarak tutulması önerilir.**
+
+**Kendi HttpClient'ınız ile.** `IHttpClientFactory` kullanan uygulamalarda:
+
+```csharp
+builder.Services.AddHttpClient("parasut");
+
+builder.Services.AddSingleton(sp =>
+{
+    var http = sp.GetRequiredService<IHttpClientFactory>().CreateClient("parasut");
+    return new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", "COMPANY ID", http);
+});
+```
+
+**İptal desteği.** Tüm servis metodları isteğe bağlı `CancellationToken` alır:
+
+```csharp
+var response = await parasut.Customer.Create(model, cancellationToken);
+```
+
+## Token Yönetimi
+
+Token `Parasut` nesnesi içinde önbelleğe alınır ve süresi dolmadan (60 saniye güvenlik payıyla) yeniden istenmez. Servis metodlarını çağırmadan önce ayrıca token almanız gerekmez.
+
+Kimlik bilgilerini çalışma anında değiştirirseniz önbellek otomatik temizlenir. Elle temizlemek için:
+
+```csharp
+parasut.Auth.InvalidateToken();
+```
+
+Token'a doğrudan erişmek isterseniz:
+
+```csharp
+var response = await parasut.Auth.Token();
+if (response.IsSuccess)
+{
+    Console.WriteLine("access_token: " + response.Data?.access_token);
+}
+else
+{
+    Console.WriteLine("HATA: " + response.Message);
+}
+```
+
+## Servis Sonucu (Envelope)
+
+Tüm servisler ortak bir zarf (envelope) nesnesi döner. Bu nesne servisin çalışma sonucu hakkında meta bilgi taşır ve asıl veriyi sarmalar.
+
+```csharp
+public class ParasutServiceResult<T>
+{
+    public bool IsSuccess { get; set; }
+    public string? Message { get; set; }
+    public List<ParasutError>? Errors { get; set; }
+    public T? Data { get; set; }
+}
+```
+
+| Alan | Açıklama |
+| --- | --- |
+| `IsSuccess` | Servis başarıyla tamamlandıysa `true`, hata oluştuysa `false` döner. |
+| `Message` | Hata oluştuysa hatanın mesajını döndürür. |
+| `Errors` | Paraşüt yapılandırılmış hata döndürdüyse (`{"errors":[{"title","detail"}]}`) doldurulur. |
+| `Data` | Servis çağrılırken belirtilen tipte veriyi döndürür. |
+
+Hata ayrıntılarına erişim:
+
+```csharp
+if (!response.IsSuccess)
+{
+    Console.WriteLine(response.Message);
+
+    if (response.Errors != null)
+    {
+        foreach (var error in response.Errors)
+        {
+            Console.WriteLine(error.title + ": " + error.detail);
+        }
+    }
+}
+```
+
+## Desteklenen Servisler
+
+| Servis | Metod | Açıklama |
+| --- | --- | --- |
+| `parasut.Auth` | `Token()` | Token alır (otomatik, elle çağırmak gerekmez) |
+| `parasut.Customer` | `Create()` · `Edit()` | Müşteri oluşturur / günceller |
+| `parasut.Product` | `Create()` · `Edit()` | Ürün oluşturur / günceller |
+| `parasut.Invoice` | `Create()` · `Edit()` | Satış faturası oluşturur / günceller |
+| `parasut.InvoicePayment` | `Pay()` | Faturaya ödeme ekler |
+| `parasut.CustomerPayment` | `ContactDebitTransactions()` | Müşteriye ödeme/tahsilat ekler |
+| `parasut.EInvoiceInbox` | `List()` | E-fatura gelen kutusu sorgular |
+| `parasut.EInvoice` | `Create()` | Faturayı e-faturaya dönüştürür |
+| `parasut.EArchive` | `Create()` | Faturayı e-arşiv faturasına dönüştürür |
+| `parasut.TrackableJob` | `GetStatus()` | E-fatura/e-arşiv işlem durumunu sorgular |
+
+---
+
+## Örnekler
+
+Aşağıdaki örneklerin tamamı, çalıştırılabilir hâlde [`AvvaMobile.Core.Parasut.Sample`](https://github.com/AvvaMobile/AvvaMobile.Core.Parasut) konsol projesinde bulunur. Her metodun kendine özel parametreleri olduğu için örnekleri sırayla inceleyerek ilerlemeniz önerilir.
+
+Örneklerde tekrarı azaltmak için `parasut` nesnesinin ve `using` satırının bir kez tanımlandığı varsayılmıştır:
+
 ```csharp
 using AvvaMobile.Core.Parasut;
 
 var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", "COMPANY ID");
+```
 
-var model = new CustomerRequest()
+- [Yeni Müşteri Yaratmak](#yeni-müşteri-yaratmak)
+- [Müşteriye Ödeme Eklemek](#müşteriye-ödeme-eklemek)
+- [Yeni Ürün Eklemek](#yeni-ürün-eklemek)
+- [Müşteriye Fatura Kesmek](#müşteriye-fatura-kesmek)
+- [Faturaya Ödeme Eklemek](#faturaya-ödeme-eklemek)
+- [Müşterinin E-Fatura Gelen Kutusu Sorgulaması Yapmak](#müşterinin-e-fatura-gelen-kutusu-sorgulaması-yapmak)
+- [Faturayı E-Faturaya Dönüştürmek](#faturayı-e-faturaya-dönüştürmek)
+- [Faturayı E-Arşiv Faturasına Dönüştürmek](#faturayı-e-arşiv-faturasına-dönüştürmek)
+- [Fatura İşlem Durumunu Sorgulamak](#fatura-i̇şlem-durumunu-sorgulamak)
+
+### Yeni Müşteri Yaratmak
+
+```csharp
+var model = new CustomerRequest
 {
     data = new CustomerRequest_Data
     {
@@ -124,21 +243,18 @@ var model = new CustomerRequest()
 var response = await parasut.Customer.Create(model);
 if (response.IsSuccess)
 {
-    Console.WriteLine("Customer ID: " + response.Data.data.id);
+    Console.WriteLine("Customer ID: " + response.Data?.data?.id);
 }
 else
 {
-    Console.WriteLine("ERROR: " + response.Message);
+    Console.WriteLine("HATA: " + response.Message);
 }
 ```
 
-## Müşteriye Ödeme Eklemek
+### Müşteriye Ödeme Eklemek
+
 ```csharp
-using AvvaMobile.Core.Parasut;
-
-var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", "COMPANY ID");
-
-var customerID = "117650289"; //Müşterinin Paraşüt'teki ID'si
+var customerID = "117650289"; // Müşterinin Paraşüt'teki ID'si
 
 var model = new CustomerPaymentRequest
 {
@@ -149,7 +265,7 @@ var model = new CustomerPaymentRequest
             description = "Ödeme açıklaması",
             account_id = 1009901,
             date = "2023-04-13",
-            amount = new decimal(123.44)
+            amount = 123.44m
         }
     }
 };
@@ -157,20 +273,17 @@ var model = new CustomerPaymentRequest
 var response = await parasut.CustomerPayment.ContactDebitTransactions(model, customerID);
 if (response.IsSuccess)
 {
-    Console.WriteLine("Payment ID: " + response.Data.data.id);
+    Console.WriteLine("Payment ID: " + response.Data?.data?.id);
 }
 else
 {
-    Console.WriteLine("ERROR: " + response.Message);
+    Console.WriteLine("HATA: " + response.Message);
 }
 ```
 
-## Yeni Ürün Eklemek
+### Yeni Ürün Eklemek
+
 ```csharp
-using AvvaMobile.Core.Parasut;
-
-var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", "COMPANY ID");
-
 var model = new ProductRequest
 {
     data = new ProductRequest_Data
@@ -180,7 +293,7 @@ var model = new ProductRequest
             name = "Yeni Ürün",
             vat_rate = 18,
             unit = "Adet",
-            list_price = new decimal(123.45),
+            list_price = 123.45m,
             currency = Currencies.TRL
         }
     }
@@ -189,23 +302,19 @@ var model = new ProductRequest
 var response = await parasut.Product.Create(model);
 if (response.IsSuccess)
 {
-    Console.WriteLine("Product ID: " + response.Data.data.id);
+    Console.WriteLine("Product ID: " + response.Data?.data?.id);
 }
 else
 {
-    Console.WriteLine("ERROR: " + response.Message);
+    Console.WriteLine("HATA: " + response.Message);
 }
 ```
 
-## Müşteriye Fatura Kesmek
+### Müşteriye Fatura Kesmek
 
-Fatura kesme işlemi biraz karışık olması sebebiyle, gönderilecek parametlerin doğruluğundan emin olmanızı öneririz.
+> Fatura kesme işlemi görece karmaşıktır; gönderilecek parametrelerin doğruluğundan emin olmanızı öneririz.
 
 ```csharp
-using AvvaMobile.Core.Parasut;
-
-var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", "COMPANY ID");
-
 var model = new InvoiceRequest
 {
     data = new InvoiceRequest_Data
@@ -223,7 +332,7 @@ var model = new InvoiceRequest
             {
                 data = new InvoiceRequest_Data_Relationships_Contact_Data
                 {
-                    id = "117675307" // Müşterinin Paraşütteki ID'si
+                    id = "117675307" // Müşterinin Paraşüt'teki ID'si
                 }
             },
             details = new InvoiceRequest_Data_Relationships_Details
@@ -235,9 +344,10 @@ var model = new InvoiceRequest
                         attributes = new InvoiceRequest_Data_Relationships_Details_Data_Attributes
                         {
                             quantity = 1,
-                            unit_price = new decimal(1),
+                            unit_price = 1m,
                             vat_rate = 18,
                             description = "Danışmanlık"
+                            // Tevkifatlı fatura için: vat_withholding_rate = 20
                         },
                         relationships = new InvoiceRequest_Data_Relationships_Details_Data_Relationships
                         {
@@ -245,7 +355,7 @@ var model = new InvoiceRequest
                             {
                                 data = new InvoiceRequest_Data_Relationships_Details_Data_Relationships_Product_Data
                                 {
-                                    id = "36605869" // Fatura kaleminde kullanılacak olan ürünün Paraşütteki ID'si.
+                                    id = "36605869" // Kalemde kullanılacak ürünün Paraşüt'teki ID'si
                                 }
                             }
                         }
@@ -259,20 +369,17 @@ var model = new InvoiceRequest
 var response = await parasut.Invoice.Create(model);
 if (response.IsSuccess)
 {
-    Console.WriteLine("Invoice ID: " + response.Data.data.id);
+    Console.WriteLine("Invoice ID: " + response.Data?.data?.id);
 }
 else
 {
-    Console.WriteLine("ERROR: " + response.Message);
+    Console.WriteLine("HATA: " + response.Message);
 }
 ```
 
-## Faturaya Ödeme Eklemek
+### Faturaya Ödeme Eklemek
+
 ```csharp
-using AvvaMobile.Core.Parasut;
-
-var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", "COMPANY ID");
-
 var invoiceID = "155047996";
 
 var model = new InvoicePaymentRequest
@@ -284,7 +391,7 @@ var model = new InvoicePaymentRequest
             description = "Ödeme açıklaması",
             account_id = 1009901,
             date = "2023-04-13",
-            amount = new decimal(123.44)
+            amount = 123.44m
         }
     }
 };
@@ -292,44 +399,46 @@ var model = new InvoicePaymentRequest
 var response = await parasut.InvoicePayment.Pay(model, invoiceID);
 if (response.IsSuccess)
 {
-    Console.WriteLine("Payment ID: " + response.Data.data.id);
+    Console.WriteLine("Payment ID: " + response.Data?.data?.id);
 }
 else
 {
-    Console.WriteLine("ERROR: " + response.Message);
+    Console.WriteLine("HATA: " + response.Message);
 }
 ```
 
-## Müşterinin E-Fatura Gelen Kutusu Sorgulaması Yapmak
-Bir müşteriye E-Fatura kesmeden önce mutlaka o müşterinin e-fatura abonesi olup olmadığını kontrol etmelisiniz. Bu metod ile ilgili müşterinin tüm fatura gelen kutularının listesini çekebilirsiniz. Eğer yok ise e-fatura kesemezsiniz. Eğer birden fazla var ise hangi gelen kutusuna göndereceğinizi bilmek için dönünen bilgiler içerisindeki gelen kutusu adresini kullanmalısınız.
+### Müşterinin E-Fatura Gelen Kutusu Sorgulaması Yapmak
+
+> Bir müşteriye e-fatura kesmeden önce **mutlaka** o müşterinin e-fatura abonesi olup olmadığını kontrol edin. Bu metod ilgili müşterinin tüm fatura gelen kutularını listeler. Kayıt yoksa e-fatura kesemezsiniz — e-arşiv fatura kesmelisiniz. Birden fazla kutu varsa, hangisine göndereceğinizi belirlemek için dönen kayıtlardaki gelen kutusu adresini kullanın.
 
 ```csharp
-using AvvaMobile.Core.Parasut;
-
-var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", "COMPANY ID");
-
 var response = await parasut.EInvoiceInbox.List("VERGİ NUMARASI");
 if (response.IsSuccess)
 {
-    Console.WriteLine("E-Invoice Inbox Count: " + response.Data.data.Count);
-    Console.WriteLine("E-Invoice Inbox Name: " + response.Data.data.e_invoice_address);
+    var inboxes = response.Data?.data;
+    Console.WriteLine("E-Invoice Inbox Count: " + (inboxes?.Count ?? 0));
+
+    if (inboxes != null)
+    {
+        foreach (var inbox in inboxes)
+        {
+            Console.WriteLine("Adres: " + inbox.attributes?.e_invoice_address);
+        }
+    }
 }
 else
 {
-    Console.WriteLine("ERROR: " + response.Message);
+    Console.WriteLine("HATA: " + response.Message);
 }
 ```
 
-## Faturayı E-Faturaya Dönüştür
-Eğer müşterinin bir e-fatura üyeliği var ise bu yöntemi kullanarak e-faturaya dönüştürebilirsiniz. Eğer müşterinin e-fatura üyeliği yok ise e-arşiv fatura kesmelisiniz.
+### Faturayı E-Faturaya Dönüştürmek
 
-e-Fatura / e-Arşiv / e-Smm oluşturma işlemi synchronous değildir. Yani istek arka planda yerine getirilir. Bu yüzden e-Fatura / e-Arşiv / e-Smm oluşturma endpoint'leri cevap olarak oluşturma işleminin durumunu takip edebileceğiniz bir işlem id'si döner. Bu işlem id'sini sorgulama endpoint'inde belirli aralıklarla(id'nin kullanım süresi oluşturulduktan sonra 15 dakikadır) kullanıp oluşturma işleminin durumunu takip etmeniz gerekmektedir.
+> Müşterinin e-fatura üyeliği varsa bu yöntemi kullanın. Üyeliği yoksa e-arşiv fatura kesmelisiniz.
+
+> **e-Fatura / e-Arşiv / e-SMM oluşturma işlemi senkron değildir.** İstek arka planda yerine getirilir. Bu yüzden oluşturma endpoint'leri cevap olarak, işlemin durumunu takip edebileceğiniz bir işlem ID'si (trackable job) döner. Bu ID'yi [durum sorgulama](#fatura-i̇şlem-durumunu-sorgulamak) metodunda belirli aralıklarla kullanarak sonucu takip etmeniz gerekir. **ID'nin kullanım süresi oluşturulduktan sonra 15 dakikadır.**
 
 ```csharp
-using AvvaMobile.Core.Parasut;
-
-var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", "COMPANY ID");
-
 var model = new EInvoiceCreateRequest
 {
     data = new EInvoiceCreateRequest_Data
@@ -346,7 +455,7 @@ var model = new EInvoiceCreateRequest
             {
                 data = new EInvoiceCreateRequest_Data_Relationships_Invoice_Data
                 {
-                    id = "FATURA NO" // Paraşütte daha önce eklenmiş ve e-faturaya dönüştürülecek olan faturanın ID'si.
+                    id = "FATURA NO" // Paraşüt'te daha önce eklenmiş, e-faturaya dönüştürülecek faturanın ID'si
                 }
             }
         }
@@ -356,22 +465,21 @@ var model = new EInvoiceCreateRequest
 var response = await parasut.EInvoice.Create(model);
 if (response.IsSuccess)
 {
-    Console.WriteLine("E-Invoice ID: " + response.Data.data.id);
+    Console.WriteLine("E-Invoice ID: " + response.Data?.data?.id);
 }
 else
 {
-    Console.WriteLine("ERROR: " + response.Message);
+    Console.WriteLine("HATA: " + response.Message);
 }
 ```
 
-## Faturayı E-Arşiv Faturasına Dönüştür
-Bu bölümden yalnızca e-arşiv faturası kesebilirsiniz. Eğer müşterinin e-fatura üyeliği var ise yukarıdaki yöntemi kullanmalısınız.
+### Faturayı E-Arşiv Faturasına Dönüştürmek
 
-e-Fatura / e-Arşiv / e-Smm oluşturma işlemi synchronous değildir. Yani istek arka planda yerine getirilir. Bu yüzden e-Fatura / e-Arşiv / e-Smm oluşturma endpoint'leri cevap olarak oluşturma işleminin durumunu takip edebileceğiniz bir işlem id'si döner. Bu işlem id'sini sorgulama endpoint'inde belirli aralıklarla(id'nin kullanım süresi oluşturulduktan sonra 15 dakikadır) kullanıp oluşturma işleminin durumunu takip etmeniz gerekmektedir.
+> Bu bölümden yalnızca e-arşiv faturası kesebilirsiniz. Müşterinin e-fatura üyeliği varsa [yukarıdaki yöntemi](#faturayı-e-faturaya-dönüştürmek) kullanmalısınız.
+
+> Bu işlem de senkron değildir; dönen işlem ID'sini durum sorgulama metoduyla takip edin (ID ömrü 15 dakika).
 
 ```csharp
-using AvvaMobile.Core.Parasut;
-
 var model = new EArchiveCreateRequest
 {
     data = new EArchiveCreateRequest_Data
@@ -386,7 +494,7 @@ var model = new EArchiveCreateRequest
             {
                 data = new EArchiveCreateRequest_Data_Relationships_Invoice_Data
                 {
-                    id = "FATURA NO" // Paraşütte daha önce eklenmiş ve e-faturaya dönüştürülecek olan faturanın ID'si.
+                    id = "FATURA NO" // Paraşüt'te daha önce eklenmiş, e-arşive dönüştürülecek faturanın ID'si
                 }
             }
         }
@@ -396,33 +504,86 @@ var model = new EArchiveCreateRequest
 var response = await parasut.EArchive.Create(model);
 if (response.IsSuccess)
 {
-    Console.WriteLine("E-Archive ID: " + response.Data.data.id);
+    Console.WriteLine("E-Archive ID: " + response.Data?.data?.id);
 }
 else
 {
-    Console.WriteLine("ERROR: " + response.Message);
+    Console.WriteLine("HATA: " + response.Message);
 }
 ```
 
-## Fatura İşlem Durumunu Sorgulama
-E-Fatura veya E-Arşiv olarak resmileştirilmiş olan bir faturanın, durumunu sorgulamak için kullanılır.
+### Fatura İşlem Durumunu Sorgulamak
+
+E-fatura veya e-arşiv olarak resmileştirilmiş bir faturanın durumunu sorgulamak için kullanılır.
 
 ```csharp
-using AvvaMobile.Core.Parasut;
-
 var model = new TrackableJobRequest
 {
-    id = 123, // Trackable Job ID'si yani e-arşiv veya e-fatura kesme işlemi sonucunda dönen ID.
+    id = 123,        // E-arşiv / e-fatura kesme işlemi sonucunda dönen trackable job ID'si
     company_id = 456 // Şirket ID'si
 };
 
 var response = await parasut.TrackableJob.GetStatus(model);
 if (response.IsSuccess)
 {
-    Console.WriteLine("Status: " + response.Data.data.attributes.status);
+    Console.WriteLine("Status: " + response.Data?.data?.attributes?.status);
+
+    var errors = response.Data?.data?.attributes?.errors;
+    if (errors != null)
+    {
+        foreach (var error in errors)
+        {
+            Console.WriteLine("İşlem hatası: " + error);
+        }
+    }
 }
 else
 {
-    Console.WriteLine("ERROR: " + response.Message);
+    Console.WriteLine("HATA: " + response.Message);
 }
 ```
+
+---
+
+## 1.1.x → 1.2.0 Geçiş Notları
+
+1.1.x'ten gelen kod **değişiklik gerektirmeden derlenir**. Yine de üç noktaya dikkat edin.
+
+**1. Düzeltilen alan adları.** Paraşüt API'ında karşılığı olmayan iki alan yüzünden bazı veriler sessizce boş geliyordu. Eski adlar çalışmaya devam ediyor (yeni alana yönlendiriliyor), ancak yenilerini kullanın:
+
+| Eski (1.1.x) | Yeni | 1.1.x'teki davranış |
+| --- | --- | --- |
+| `InvoiceResponse...vat_withholding` | `total_vat_withholding` | her zaman `0` dönüyordu |
+| `ProductResponse...updated_ay` | `updated_at` | her zaman `null` dönüyordu |
+
+> Bu alanlar artık gerçek değerlerini döndürüyor. Daha önce bu hatanın etrafından dolanmak için tevkifatı kendiniz hesaplayıp eklediyseniz, çift saymamak için kontrol edin.
+
+**2. Tevkifat oranı kalem seviyesindedir.** `InvoiceRequest_Data_Attributes.vat_withholding_rate` Paraşüt API'ında bulunmadığı için etkisizdir; geriye dönük uyumluluk adına korunmuştur. Tevkifat oranını kalem bazında verin:
+
+```csharp
+new InvoiceRequest_Data_Relationships_Details_Data_Attributes
+{
+    quantity = 1,
+    unit_price = 1000m,
+    vat_rate = 20,
+    vat_withholding_rate = 20 // Tevkifat oranı burada
+}
+```
+
+**3. Token artık önbelleğe alınıyor.** Her servis çağrısı ayrı token isteği atmıyor. Ayrıntı için [Token Yönetimi](#token-yönetimi) bölümüne bakın.
+
+Ayrıca bu sürümde: paket harici bağımlılıklarından arındırıldı (`HttpClient` + `System.Text.Json`), `CancellationToken` desteği eklendi, kendi `HttpClient`'ınızı verebilir hâle geldi, hata gövdeleri `Errors` listesine çözümleniyor ve `TrackableJob.GetStatus` artık doğru HTTP metodunu (`GET`) kullanıyor.
+
+---
+
+## Katkı ve İletişim
+
+Desteğinize her zaman ihtiyacımız var. Geliştirme ekibine katılmak için <opensource@avvamobile.com> adresinden bizimle iletişime geçin.
+
+### Geliştiriciler
+
+- [@jackmuratyilmaz](https://www.github.com/jackmuratyilmaz)
+- [@Onurryilmazz](https://www.github.com/Onurryilmazz)
+- [@ocalesmer](https://www.github.com/ocalesmer)
+- [@cativ3](https://www.github.com/cativ3)
+- [@avvamobiledogukan](https://github.com/orgs/AvvaMobile/people/avvamobiledogukan)

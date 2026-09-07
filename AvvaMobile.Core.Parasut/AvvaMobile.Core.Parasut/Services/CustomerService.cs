@@ -1,72 +1,44 @@
-﻿namespace AvvaMobile.Core.Parasut;
+namespace AvvaMobile.Core.Parasut;
 
 public class CustomerService : ParasutBaseService
 {
-    public CustomerService(Auth auth, string parasutBaseUrl) : base(auth, parasutBaseUrl)
+    public CustomerService(Auth auth, string parasutBaseUrl) : this(auth, parasutBaseUrl, null)
+    {
+    }
+
+    public CustomerService(Auth auth, string parasutBaseUrl, HttpClient? httpClient) : base(auth, parasutBaseUrl, httpClient)
     {
     }
 
     /// <summary>
     /// Creates a customer on Paraşüt.
     /// </summary>
-    /// <returns></returns>
-    public async Task<ParasutServiceResult<CustomerResponse>> Create(CustomerRequest customer)
+    public async Task<ParasutServiceResult<CustomerResponse>> Create(CustomerRequest customer, CancellationToken cancellationToken = default)
     {
         var result = new ParasutServiceResult<CustomerResponse>();
 
-        var nm = new NetworkManager(ParasutBaseUrl);
-        nm.AddContentTypeJSONHeader();
-
-        var token = await Auth.Token();
-        if (!token.IsSuccess)
+        var token = await GetAccessTokenAsync(result, cancellationToken).ConfigureAwait(false);
+        if (token is null)
         {
-            result.SetError("Token alınamadı.");
             return result;
         }
-        nm.AddBearerToken(token.Data.access_token);
 
-        var httpResponse = await nm.PostAsync<CustomerResponse>("/contacts", customer);
-        if (httpResponse.IsSuccess)
-        {
-            result.Data = httpResponse.Data;
-        }
-        else
-        {
-            result.SetError(httpResponse.Message);
-        }
-
-        return result;
+        return await Http.PostAsync<CustomerResponse>("/contacts", customer, token, cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
     /// Edits a customer on Paraşüt.
     /// </summary>
-    /// <returns></returns>
-    public async Task<ParasutServiceResult<CustomerResponse>> Edit(CustomerRequest customer)
+    public async Task<ParasutServiceResult<CustomerResponse>> Edit(CustomerRequest customer, CancellationToken cancellationToken = default)
     {
         var result = new ParasutServiceResult<CustomerResponse>();
 
-        var nm = new NetworkManager(ParasutBaseUrl);
-        nm.AddContentTypeJSONHeader();
-
-        var token = await Auth.Token();
-        if (!token.IsSuccess)
+        var token = await GetAccessTokenAsync(result, cancellationToken).ConfigureAwait(false);
+        if (token is null)
         {
-            result.SetError("Token alınamadı.");
             return result;
         }
-        nm.AddBearerToken(token.Data.access_token);
 
-        var httpResponse = await nm.PutAsync<CustomerResponse>("/contacts/" + customer.data.id, customer);
-        if (httpResponse.IsSuccess)
-        {
-            result.Data = httpResponse.Data;
-        }
-        else
-        {
-            result.SetError(httpResponse.Message);
-        }
-
-        return result;
+        return await Http.PutAsync<CustomerResponse>($"/contacts/{customer.data?.id}", customer, token, cancellationToken).ConfigureAwait(false);
     }
 }

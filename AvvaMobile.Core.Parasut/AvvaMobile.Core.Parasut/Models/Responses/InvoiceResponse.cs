@@ -4,15 +4,15 @@ namespace AvvaMobile.Core.Parasut;
 
 public class InvoiceResponse
 {
-    public InvoiceResponse_Data data { get; set; }
+    public InvoiceResponse_Data? data { get; set; }
 }
 
 public class InvoiceResponse_Data
 {
-    public string id { get; set; }
+    public string? id { get; set; }
     public string type { get; set; } = "sales_invoices";
-    public InvoiceResponse_Data_Attributes attributes { get; set; }
-    public InvoiceResponse_Data_Relationships relationships { get; set; }
+    public InvoiceResponse_Data_Attributes? attributes { get; set; }
+    public InvoiceResponse_Data_Relationships? relationships { get; set; }
 }
 
 public class InvoiceResponse_Data_Attributes
@@ -22,7 +22,7 @@ public class InvoiceResponse_Data_Attributes
     /// <summary>
     /// Fatura no
     /// </summary>
-    public string invoice_no { get; set; }
+    public string? invoice_no { get; set; }
 
     /// <summary>
     /// Genel Toplam
@@ -49,9 +49,20 @@ public class InvoiceResponse_Data_Attributes
     public decimal total_vat { get; set; }
 
     /// <summary>
-    /// Tevkifat
+    /// Tevkifat. Paraşüt bu alanı "total_vat_withholding" adıyla döner.
     /// </summary>
-    public decimal vat_withholding { get; set; }
+    public decimal total_vat_withholding { get; set; }
+
+    /// <summary>
+    /// Tevkifat. KULLANMAYIN - Paraşüt API'ında bu adda bir alan yoktur ve 1.1.x sürümlerinde
+    /// bu alan her zaman 0 dönüyordu. total_vat_withholding kullanın.
+    /// </summary>
+    [System.Text.Json.Serialization.JsonIgnore]
+    public decimal vat_withholding
+    {
+        get => total_vat_withholding;
+        set => total_vat_withholding = value;
+    }
 
     /// <summary>
     /// Toplam indirim
@@ -78,36 +89,36 @@ public class InvoiceResponse_Data_Attributes
     /// <summary>
     /// Tahsilat durumu: paid, overdue, unpaid, partially_paid
     /// </summary>
-    public string payment_status { get; set; }
+    public string? payment_status { get; set; }
 
-    public string created_at { get; set; }
+    public string? created_at { get; set; }
 
-    public string updated_at { get; set; }
+    public string? updated_at { get; set; }
 
     /// <summary>
     /// Fatura türü: invoice, export, estimate, cancelled, recurring_invoice, recurring_estimate, recurring_export, refund
     /// </summary>
-    public string item_type { get; set; }
+    public string? item_type { get; set; }
 
     /// <summary>
     /// Fatura açıklaması
     /// </summary>
-    public string description { get; set; }
+    public string? description { get; set; }
 
     /// <summary>
     /// Düzenleme tarihi
     /// </summary>
-    public string issue_date { get; set; }
+    public string? issue_date { get; set; }
 
     /// <summary>
     /// Son tahsilat tarihi
     /// </summary>
-    public string due_date { get; set; }
+    public string? due_date { get; set; }
 
     /// <summary>
     /// Fatura seri
     /// </summary>
-    public string invoice_series { get; set; }
+    public string? invoice_series { get; set; }
 
     ///// <summary>
     ///// Fatura sıra
@@ -117,7 +128,7 @@ public class InvoiceResponse_Data_Attributes
     ///// <summary>
     ///// Döviz tipi: TRL, USD, EUR, GBP
     ///// </summary>
-    //public string currency { get; set; }
+    //public string? currency { get; set; }
 
     ///// <summary>
     ///// Döviz kuru
@@ -137,7 +148,7 @@ public class InvoiceResponse_Data_Attributes
     ///// <summary>
     ///// percentage, amount
     ///// </summary>
-    //public string invoice_discount_type { get; set; }
+    //public string? invoice_discount_type { get; set; }
 
     ///// <summary>
     ///// 
@@ -147,42 +158,47 @@ public class InvoiceResponse_Data_Attributes
     ///// <summary>
     ///// Gönderim adresi
     /// </summary>
-    public string billing_address { get; set; }
+    public string? billing_address { get; set; }
+
+    /// <summary>
+    /// Gönderim posta kodu
+    /// </summary>
+    public string? billing_postal_code { get; set; }
 
     /// <summary>
     /// Gönderim adresi telefonu
     /// </summary>
-    public string billing_phone { get; set; }
+    public string? billing_phone { get; set; }
 
     /// <summary>
     /// Gönderim adresi faksı
     /// </summary>
-    public string billing_fax { get; set; }
+    public string? billing_fax { get; set; }
 
     /// <summary>
     /// Müşteri vergi dairesi
     /// </summary>
-    public string tax_office { get; set; }
+    public string? tax_office { get; set; }
 
     /// <summary>
     /// Müşteri vergi numarası
     /// </summary>
-    public string tax_number { get; set; }
+    public string? tax_number { get; set; }
 
     /// <summary>
     /// 
     /// </summary>
-    public string country { get; set; }
+    public string? country { get; set; }
 
     /// <summary>
     /// 
     /// </summary>
-    public string city { get; set; }
+    public string? city { get; set; }
 
     /// <summary>
     /// 
     /// </summary>
-    public string district { get; set; }
+    public string? district { get; set; }
 
     /// <summary>
     /// Alıcı yurt dışı bilgisi
@@ -192,17 +208,17 @@ public class InvoiceResponse_Data_Attributes
     /// <summary>
     /// 
     /// </summary>
-    public string order_no { get; set; }
+    public string? order_no { get; set; }
 
     /// <summary>
     /// 
     /// </summary>
-    public string order_date { get; set; }
+    public string? order_date { get; set; }
 
     /// <summary>
     /// 
     /// </summary>
-    public string shipment_addres { get; set; }
+    public string? shipment_addres { get; set; }
 
     /// <summary>
     /// İrsaliyeli fatura
@@ -213,33 +229,53 @@ public class InvoiceResponse_Data_Attributes
     ///// Peşin satış
     ///// </summary>
     public bool cash_sale { get; set; }
+
+    /// <summary>
+    /// Kamu faturaları için zorunludur.
+    /// </summary>
+    public List<string>? payer_tax_numbers { get; set; }
+
+    /// <summary>
+    /// Fatura notu
+    /// </summary>
+    public string? invoice_note { get; set; }
+
+    /// <summary>
+    /// Müşteri bakiyesi faturaya eklenir.
+    /// </summary>
+    public bool? append_contact_balance { get; set; }
+
+    /// <summary>
+    /// Hesap ID'leri.
+    /// </summary>
+    public List<long>? e_document_accounts { get; set; }
 }
 
 public class InvoiceResponse_Data_Relationships
 {
-    public InvoiceResponse_Data_Relationships_Contact contact { get; set; }
-    public InvoiceResponse_Data_Relationships_Details details { get; set; }
+    public InvoiceResponse_Data_Relationships_Contact? contact { get; set; }
+    public InvoiceResponse_Data_Relationships_Details? details { get; set; }
 }
 
 public class InvoiceResponse_Data_Relationships_Details
 {
-    public List<InvoiceResponse_Data_Relationships_Details_Data> data { get; set; }
+    public List<InvoiceResponse_Data_Relationships_Details_Data>? data { get; set; }
 }
 
 public class InvoiceResponse_Data_Relationships_Details_Data
 {
-    public string id { get; set; }
+    public string? id { get; set; }
     public string type { get; set; } = "sales_invoice_details";
 }
 
 public class InvoiceResponse_Data_Relationships_Contact
 {
-    public InvoiceResponse_Data_Relationships_Contact_Data data { get; set; }
+    public InvoiceResponse_Data_Relationships_Contact_Data? data { get; set; }
 }
 
 public class InvoiceResponse_Data_Relationships_Contact_Data
 {
     [Required]
-    public string id { get; set; }
+    public string? id { get; set; }
     public string type { get; set; } = "contacts";
 }

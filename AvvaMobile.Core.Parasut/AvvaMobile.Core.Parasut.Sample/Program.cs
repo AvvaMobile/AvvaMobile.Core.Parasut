@@ -8,7 +8,7 @@ async Task Token()
     var response = await parasut.Auth.Token();
     if (response.IsSuccess)
     {
-        Console.WriteLine("access_token: " + response.Data.access_token);
+        Console.WriteLine("access_token: " + response.Data?.access_token);
     }
     else
     {
@@ -39,7 +39,7 @@ async Task CustomerCreate()
     var response = await parasut.Customer.Create(model);
     if (response.IsSuccess)
     {
-        Console.WriteLine("Customer ID: " + response.Data.data.id);
+        Console.WriteLine("Customer ID: " + response.Data?.data?.id);
     }
     else
     {
@@ -71,7 +71,7 @@ async Task CustomerEdit()
     var response = await parasut.Customer.Edit(model);
     if (response.IsSuccess)
     {
-        Console.WriteLine("Customer ID: " + response.Data.data.id);
+        Console.WriteLine("Customer ID: " + response.Data?.data?.id);
     }
     else
     {
@@ -100,7 +100,7 @@ async Task CustomerPayment()
     var response = await parasut.CustomerPayment.ContactDebitTransactions(model, customerID);
     if (response.IsSuccess)
     {
-        Console.WriteLine("Payment ID: " + response.Data.data.id);
+        Console.WriteLine("Payment ID: " + response.Data?.data?.id);
     }
     else
     {
@@ -128,7 +128,7 @@ async Task ProductCreate()
     var response = await parasut.Product.Create(model);
     if (response.IsSuccess)
     {
-        Console.WriteLine("Product ID: " + response.Data.data.id);
+        Console.WriteLine("Product ID: " + response.Data?.data?.id);
     }
     else
     {
@@ -157,7 +157,7 @@ async Task ProductEdit()
     var response = await parasut.Product.Edit(model);
     if (response.IsSuccess)
     {
-        Console.WriteLine("Product ID: " + response.Data.data.id);
+        Console.WriteLine("Product ID: " + response.Data?.data?.id);
     }
     else
     {
@@ -220,7 +220,7 @@ async Task InvoiceCreate()
     var response = await parasut.Invoice.Create(model);
     if (response.IsSuccess)
     {
-        Console.WriteLine("Invoice ID: " + response.Data.data.id);
+        Console.WriteLine("Invoice ID: " + response.Data?.data?.id);
     }
     else
     {
@@ -282,7 +282,7 @@ async Task InvoiceEdit()
     var response = await parasut.Invoice.Edit(model);
     if (response.IsSuccess)
     {
-        Console.WriteLine("Invoice ID: " + response.Data.data.id);
+        Console.WriteLine("Invoice ID: " + response.Data?.data?.id);
     }
     else
     {
@@ -311,7 +311,7 @@ async Task InvoicePay()
     var response = await parasut.InvoicePayment.Pay(model, invoiceID);
     if (response.IsSuccess)
     {
-        Console.WriteLine("Payment ID: " + response.Data.data.id);
+        Console.WriteLine("Payment ID: " + response.Data?.data?.id);
     }
     else
     {
@@ -324,7 +324,7 @@ async Task EInvoiceInboxList()
     var response = await parasut.EInvoiceInbox.List("VERGİ NUMARASI");
     if (response.IsSuccess)
     {
-        Console.WriteLine("E-Invoice Inbox Count: " + response.Data.data.Count);
+        Console.WriteLine("E-Invoice Inbox Count: " + response.Data?.data?.Count);
     }
     else
     {
@@ -360,7 +360,7 @@ async Task EInvoiceCreate()
     var response = await parasut.EInvoice.Create(model);
     if (response.IsSuccess)
     {
-        Console.WriteLine("E-Invoice ID: " + response.Data.data.id);
+        Console.WriteLine("E-Invoice ID: " + response.Data?.data?.id);
     }
     else
     {
@@ -394,7 +394,7 @@ async Task EArchiveCreate()
     var response = await parasut.EArchive.Create(model);
     if (response.IsSuccess)
     {
-        Console.WriteLine("E-Archive ID: " + response.Data.data.id);
+        Console.WriteLine("E-Archive ID: " + response.Data?.data?.id);
     }
     else
     {
@@ -413,7 +413,7 @@ async Task TrackableJobGetStatus()
     var response = await parasut.TrackableJob.GetStatus(model);
     if (response.IsSuccess)
     {
-        Console.WriteLine("Status: " + response.Data.data.attributes.status);
+        Console.WriteLine("Status: " + response.Data?.data?.attributes?.status);
     }
     else
     {
