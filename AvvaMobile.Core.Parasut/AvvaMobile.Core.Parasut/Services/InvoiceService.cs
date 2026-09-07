@@ -11,6 +11,24 @@ public class InvoiceService : ParasutBaseService
     }
 
     /// <summary>
+    /// Tek bir satış faturasını ID'si ile getirir.
+    /// </summary>
+    public Task<ParasutServiceResult<InvoiceResponse>> Get(string id, CancellationToken cancellationToken = default)
+        => GetByIdAsync<InvoiceResponse>($"/sales_invoices/{Uri.EscapeDataString(id)}", cancellationToken);
+
+    /// <summary>
+    /// Paraşüt'teki satış faturalarını listeler.
+    /// </summary>
+    public Task<ParasutServiceResult<ParasutListResponse<InvoiceResponse_Data>>> List(InvoiceListQuery? query = null, CancellationToken cancellationToken = default)
+        => ListAsync<InvoiceResponse_Data>("/sales_invoices", query, cancellationToken);
+
+    /// <summary>
+    /// Bir satış faturasını siler.
+    /// </summary>
+    public Task<ParasutServiceResult> Delete(string id, CancellationToken cancellationToken = default)
+        => DeleteAsync($"/sales_invoices/{Uri.EscapeDataString(id)}", cancellationToken);
+
+    /// <summary>
     /// Creates an invoice on Paraşüt.
     /// </summary>
     public async Task<ParasutServiceResult<InvoiceResponse>> Create(InvoiceRequest invoice, CancellationToken cancellationToken = default)
