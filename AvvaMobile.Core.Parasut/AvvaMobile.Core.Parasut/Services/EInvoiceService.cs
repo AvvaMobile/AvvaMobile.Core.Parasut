@@ -11,6 +11,19 @@ public class EInvoiceService : ParasutBaseService
     }
 
     /// <summary>
+    /// Resmileşmiş e-faturayı ID'si ile getirir. Bu ID, Create sonrası dönen trackable job
+    /// tamamlandığında elde edilir.
+    /// </summary>
+    public Task<ParasutServiceResult<EInvoiceResponse>> Get(string id, CancellationToken cancellationToken = default)
+        => GetByIdAsync<EInvoiceResponse>($"/e_invoices/{Uri.EscapeDataString(id)}", cancellationToken);
+
+    /// <summary>
+    /// E-faturayı PDF bağlantısını getirir. Dönen bağlantı sürelidir.
+    /// </summary>
+    public Task<ParasutServiceResult<EDocumentPdfResponse>> GetPdf(string id, CancellationToken cancellationToken = default)
+        => GetByIdAsync<EDocumentPdfResponse>($"/e_invoices/{Uri.EscapeDataString(id)}/pdf", cancellationToken);
+
+    /// <summary>
     /// Daha önce oluşturulmuş bir satış faturasını e-faturaya dönüştürür.
     /// </summary>
     public async Task<ParasutServiceResult<EInvoiceCreateResponse>> Create(EInvoiceCreateRequest invoice, CancellationToken cancellationToken = default)
