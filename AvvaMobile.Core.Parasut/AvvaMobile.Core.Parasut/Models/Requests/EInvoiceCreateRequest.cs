@@ -50,7 +50,61 @@ public class EInvoiceCreateRequest_Data_Attributes
     /// </summary>
     public string? to { get; set; }
 
+    /// <summary>
+    /// Özel gereksinim duyan firmalara (SGK vb.) e-fatura keserken doldurulur.
+    /// Ayrıntı: https://apidocs.parasut.com/#section/SIK-KULLANILAN-ISLEMLER/Belirli-Firmalar-Icin-Ozel-Gereksinimler
+    /// </summary>
+    public EInvoiceCreateRequest_Data_Attributes_CustomRequirementParams? custom_requirement_params { get; set; }
+}
 
+public class EInvoiceCreateRequest_Data_Attributes_CustomRequirementParams
+{
+    public EInvoiceCreateRequest_Data_Attributes_CustomRequirementParams_Integration? integration { get; set; }
+}
+
+public class EInvoiceCreateRequest_Data_Attributes_CustomRequirementParams_Integration
+{
+    public EInvoiceCreateRequest_Data_Attributes_CustomRequirementParams_Integration_Data? data { get; set; }
+}
+
+public class EInvoiceCreateRequest_Data_Attributes_CustomRequirementParams_Integration_Data
+{
+    /// <summary>
+    /// İlave fatura tipi. Değerler için AdditionalInvoiceTypes sınıfını kullanabilirsiniz.
+    /// </summary>
+    public string? additional_invoice_type { get; set; }
+
+    /// <summary>
+    /// Mükellef kodu
+    /// </summary>
+    public string? tax_payer_code { get; set; }
+
+    /// <summary>
+    /// Mükellef adı
+    /// </summary>
+    public string? tax_payer_name { get; set; }
+
+    /// <summary>
+    /// Dosya numarası
+    /// </summary>
+    public string? file_number { get; set; }
+
+    /// <summary>
+    /// Dönem başlangıç tarihi
+    /// </summary>
+    public string? term_start_date { get; set; }
+
+    /// <summary>
+    /// Dönem bitiş tarihi
+    /// </summary>
+    public string? term_end_date { get; set; }
+
+    /// <summary>
+    /// Paraşüt bu alanı serbest biçimli bir obje olarak tanımlar. Yukarıdakiler dışında bir alan
+    /// göndermeniz gerekirse buraya ekleyin; gövdeye aynı seviyede yazılır.
+    /// </summary>
+    [System.Text.Json.Serialization.JsonExtensionData]
+    public Dictionary<string, object>? additional_params { get; set; }
 }
 
 public class EInvoiceCreateRequest_Data_Attributes_ExciseDutyCode

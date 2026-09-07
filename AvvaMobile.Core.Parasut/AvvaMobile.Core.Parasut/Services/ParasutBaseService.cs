@@ -61,6 +61,20 @@ public static class Currencies
     public const string GBP = "GBP";
 }
 
+/// <summary>
+/// custom_requirement_params içindeki additional_invoice_type alanı için geçerli değerler.
+/// </summary>
+public static class AdditionalInvoiceTypes
+{
+    public const string SAGLIK_ECZ = "SAGLIK_ECZ";
+    public const string SAGLIK_HAS = "SAGLIK_HAS";
+    public const string SAGLIK_OPT = "SAGLIK_OPT";
+    public const string SAGLIK_MED = "SAGLIK_MED";
+    public const string ABONELIK = "ABONELIK";
+    public const string MAL_HIZMET = "MAL_HIZMET";
+    public const string DIGER = "DIGER";
+}
+
 public static class DiscountTypes
 {
     public const string percentage = "percentage";
