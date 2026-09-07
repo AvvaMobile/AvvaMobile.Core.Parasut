@@ -1,5 +1,3 @@
-<div align="center">
-
 # Paraşüt
 
 **Paraşüt API'ı ile uğraşmadan, kolay ve hızlı çalışmanızı sağlayan .NET paketi.**
@@ -7,9 +5,7 @@
 [![NuGet](https://img.shields.io/nuget/v/AvvaMobile.Core.Parasut.svg)](https://www.nuget.org/packages/AvvaMobile.Core.Parasut)
 [![Downloads](https://img.shields.io/nuget/dt/AvvaMobile.Core.Parasut.svg)](https://www.nuget.org/packages/AvvaMobile.Core.Parasut)
 ![.NET](https://img.shields.io/badge/.NET-6.0%20%7C%207.0%20%7C%208.0%20%7C%2010.0-512BD4)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-
-</div>
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/AvvaMobile/AvvaMobile.Core.Parasut/blob/master/LICENSE)
 
 Geliştiricilerin Paraşüt API'larını düşük seviyede uğraşmadan kullanabilmesi için hazırlanmıştır. Kimlik doğrulama, token yönetimi, serileştirme ve hata çözümlemesi paket tarafından halledilir; siz yalnızca iş modelinizi doldurup metodu çağırırsınız.
 
@@ -648,7 +644,7 @@ Ayrıca bu sürümde: `CancellationToken` desteği eklendi, kendi `HttpClient`'�
 
 ## Katkı ve İletişim
 
-Desteğinize her zaman ihtiyacımız var. Geliştirme ekibine katılmak için <opensource@avvamobile.com> adresinden bizimle iletişime geçin.
+Desteğinize her zaman ihtiyacımız var. Geliştirme ekibine katılmak için [opensource@avvamobile.com](mailto:opensource@avvamobile.com) adresinden bizimle iletişime geçin.
 
 ### Geliştiriciler
 
@@ -662,6 +658,6 @@ Desteğinize her zaman ihtiyacımız var. Geliştirme ekibine katılmak için <o
 
 ## Lisans
 
-[MIT](LICENSE) — Copyright (c) 2022-2026 Avva Mobile Enterprise Solutions
+[MIT](https://github.com/AvvaMobile/AvvaMobile.Core.Parasut/blob/master/LICENSE) — Copyright (c) 2022-2026 Avva Mobile Enterprise Solutions
 
 Ticari projeler dahil olmak üzere herkes ücretsiz kullanabilir, değiştirebilir ve dağıtabilir. Tek şart, telif bildirimi ile lisans metninin korunmasıdır. Yazılım "olduğu gibi" sunulur, herhangi bir garanti verilmez.

@@ -22,7 +22,7 @@
 		<RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
 		<RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
 		<EnableNETAnalyzers>False</EnableNETAnalyzers>
-		<Version>2.0.2</Version>
+		<Version>2.0.3</Version>
 		<GenerateDocumentationFile>False</GenerateDocumentationFile>
 		<!-- Sembol paketi ve kaynak kodu bağlantısı: paketin içine adım adım debug edilebilsin. -->
 		<IncludeSymbols>true</IncludeSymbols>
