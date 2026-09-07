@@ -11,6 +11,12 @@ public class CustomerService : ParasutBaseService
     }
 
     /// <summary>
+    /// Paraşüt'teki müşterileri/tedarikçileri listeler.
+    /// </summary>
+    public Task<ParasutServiceResult<ParasutListResponse<CustomerResponse_Data>>> List(CustomerListQuery? query = null, CancellationToken cancellationToken = default)
+        => ListAsync<CustomerResponse_Data>("/contacts", query, cancellationToken);
+
+    /// <summary>
     /// Creates a customer on Paraşüt.
     /// </summary>
     public async Task<ParasutServiceResult<CustomerResponse>> Create(CustomerRequest customer, CancellationToken cancellationToken = default)
