@@ -2,14 +2,14 @@
 
 public class CustomerPaymentRequest
 {
-    public CustomerPaymentRequest_Data data { get; set; }
+    public CustomerPaymentRequest_Data? data { get; set; }
 }
 
 public class CustomerPaymentRequest_Data
 {
-    public string id { get; set; }
+    public string? id { get; set; }
     public string type { get; set; } = "transactions";
-    public CustomerPaymentRequest_Data_Attributes attributes { get; set; }
+    public CustomerPaymentRequest_Data_Attributes? attributes { get; set; }
 }
 
 public class CustomerPaymentRequest_Data_Attributes
@@ -17,7 +17,7 @@ public class CustomerPaymentRequest_Data_Attributes
     /// <summary>
     /// Ödeme/Tahsilat Açıklaması
     /// </summary>
-    public string description { get; set; }
+    public string? description { get; set; }
 
     /// <summary>
     /// Kasa veya Banka - Bu parametre ayrıca ödemenin/tahsilatın hangi döviz kuru ile yapılacağını belirler.
@@ -27,7 +27,7 @@ public class CustomerPaymentRequest_Data_Attributes
     /// <summary>
     /// Ödeme/Tahsilat tarihi
     /// </summary>
-    public string date { get; set; }
+    public string? date { get; set; }
 
     /// <summary>
     /// Ödeme/Tahsilat tutarı
@@ -42,5 +42,5 @@ public class CustomerPaymentRequest_Data_Attributes
     /// <summary>
     /// Satış Faturası ID'leri - Tahsilatınızın öncelikli olarak eşleşmesini istediğiniz faturalar
     /// </summary>
-    public List<int> payable_ids { get; set; }
+    public List<int>? payable_ids { get; set; }
 }

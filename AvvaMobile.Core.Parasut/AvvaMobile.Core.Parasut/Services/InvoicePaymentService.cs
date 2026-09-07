@@ -1,40 +1,28 @@
-﻿namespace AvvaMobile.Core.Parasut;
+namespace AvvaMobile.Core.Parasut;
 
 public class InvoicePaymentService : ParasutBaseService
 {
-    public InvoicePaymentService(Auth auth, string parasutBaseUrl) : base(auth, parasutBaseUrl)
+    public InvoicePaymentService(Auth auth, string parasutBaseUrl) : this(auth, parasutBaseUrl, null)
+    {
+    }
+
+    public InvoicePaymentService(Auth auth, string parasutBaseUrl, HttpClient? httpClient) : base(auth, parasutBaseUrl, httpClient)
     {
     }
 
     /// <summary>
-    /// Creates a payment for an invoice on Paraşüt.
+    /// Bir satış faturasına ödeme kaydeder.
     /// </summary>
-    /// <returns></returns>
-    public async Task<ParasutServiceResult<InvoicePaymentResponse>> Pay(InvoicePaymentRequest payment, string invoiceId)
+    public async Task<ParasutServiceResult<InvoicePaymentResponse>> Pay(InvoicePaymentRequest payment, string invoiceId, CancellationToken cancellationToken = default)
     {
         var result = new ParasutServiceResult<InvoicePaymentResponse>();
 
-        var nm = new NetworkManager(ParasutBaseUrl);
-        nm.AddContentTypeJSONHeader();
-
-        var token = await Auth.Token();
-        if (!token.IsSuccess)
+        var token = await GetAccessTokenAsync(result, cancellationToken).ConfigureAwait(false);
+        if (token is null)
         {
-            result.SetError("Token alınamadı.");
             return result;
         }
-        nm.AddBearerToken(token.Data.access_token);
 
-        var httpResponse = await nm.PostAsync<InvoicePaymentResponse>($"/sales_invoices/{invoiceId}/payments", payment);
-        if (httpResponse.IsSuccess)
-        {
-            result.Data = httpResponse.Data;
-        }
-        else
-        {
-            result.SetError(httpResponse.Message);
-        }
-
-        return result;
+        return await Http.PostAsync<InvoicePaymentResponse>($"/sales_invoices/{invoiceId}/payments", payment, token, cancellationToken).ConfigureAwait(false);
     }
 }

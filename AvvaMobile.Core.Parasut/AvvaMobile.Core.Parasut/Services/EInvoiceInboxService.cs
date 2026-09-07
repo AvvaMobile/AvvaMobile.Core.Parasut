@@ -1,40 +1,28 @@
-﻿namespace AvvaMobile.Core.Parasut;
+namespace AvvaMobile.Core.Parasut;
 
 public class EInvoiceInboxService : ParasutBaseService
 {
-    public EInvoiceInboxService(Auth auth, string parasutBaseUrl) : base(auth, parasutBaseUrl)
+    public EInvoiceInboxService(Auth auth, string parasutBaseUrl) : this(auth, parasutBaseUrl, null)
+    {
+    }
+
+    public EInvoiceInboxService(Auth auth, string parasutBaseUrl, HttpClient? httpClient) : base(auth, parasutBaseUrl, httpClient)
     {
     }
 
     /// <summary>
     /// VKN bilgisi verilmiş olan firmanın bir e-fatura gelen kutusu olup olmadığını sorgular.
     /// </summary>
-    /// <returns></returns>
-    public async Task<ParasutServiceResult<EInvoiceInboxResponse>> List(string vkn)
+    public async Task<ParasutServiceResult<EInvoiceInboxResponse>> List(string vkn, CancellationToken cancellationToken = default)
     {
         var result = new ParasutServiceResult<EInvoiceInboxResponse>();
 
-        var nm = new NetworkManager(ParasutBaseUrl);
-        nm.AddContentTypeJSONHeader();
-
-        var token = await Auth.Token();
-        if (!token.IsSuccess)
+        var token = await GetAccessTokenAsync(result, cancellationToken).ConfigureAwait(false);
+        if (token is null)
         {
-            result.SetError("Token alınamadı.");
             return result;
         }
-        nm.AddBearerToken(token.Data.access_token);
 
-        var httpResponse = await nm.GetAsync<EInvoiceInboxResponse>($"/e_invoice_inboxes?filter[vkn]={vkn}");
-        if (httpResponse.IsSuccess)
-        {
-            result.Data = httpResponse.Data;
-        }
-        else
-        {
-            result.SetError(httpResponse.Message);
-        }
-
-        return result;
+        return await Http.GetAsync<EInvoiceInboxResponse>($"/e_invoice_inboxes?filter[vkn]={Uri.EscapeDataString(vkn)}", token, cancellationToken).ConfigureAwait(false);
     }
 }

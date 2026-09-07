@@ -2,36 +2,36 @@
 
 public class CustomerPaymentResponse
 {
-    public CustomerPaymentResponse_Data data { get; set; }
+    public CustomerPaymentResponse_Data? data { get; set; }
 }
 
 public class CustomerPaymentResponse_Data
 {
-    public string id { get; set; }
+    public string? id { get; set; }
     public string type { get; set; } = "transactions";
-    public CustomerPaymentResponse_Data_Attributes attributes { get; set; }
+    public CustomerPaymentResponse_Data_Attributes? attributes { get; set; }
 }
 
 public class CustomerPaymentResponse_Data_Attributes
 {
-    public string created_at { get; set; }
+    public string? created_at { get; set; }
 
-    public string updated_at { get; set; }
+    public string? updated_at { get; set; }
 
     /// <summary>
     /// Açıklama
     /// </summary>
-    public string description { get; set; }
+    public string? description { get; set; }
 
     /// <summary>
     /// İşlem türü
     /// </summary>
-    public string transaction_type { get; set; }
+    public string? transaction_type { get; set; }
 
     /// <summary>
     /// Tarih
     /// </summary>
-    public string date { get; set; }
+    public string? date { get; set; }
 
     /// <summary>
     /// TRL karşılığı meblağ
@@ -46,7 +46,7 @@ public class CustomerPaymentResponse_Data_Attributes
     /// <summary>
     /// Borç döviz cinsi: TRL, USD, EUR, GBP
     /// </summary>
-    public string debit_currency { get; set; }
+    public string? debit_currency { get; set; }
 
     /// <summary>
     /// Alacak meblağ
@@ -56,5 +56,5 @@ public class CustomerPaymentResponse_Data_Attributes
     /// <summary>
     /// Alacak döviz cinsi: TRL, USD, EUR, GBP
     /// </summary>
-    public string credit_currency { get; set; }
+    public string? credit_currency { get; set; }
 }

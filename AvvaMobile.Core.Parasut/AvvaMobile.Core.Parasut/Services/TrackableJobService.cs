@@ -1,40 +1,29 @@
-﻿namespace AvvaMobile.Core.Parasut;
+namespace AvvaMobile.Core.Parasut;
 
 public class TrackableJobService : ParasutBaseService
 {
-    public TrackableJobService(Auth auth, string parasutBaseUrl) : base(auth, parasutBaseUrl)
+    public TrackableJobService(Auth auth, string parasutBaseUrl) : this(auth, parasutBaseUrl, null)
+    {
+    }
+
+    public TrackableJobService(Auth auth, string parasutBaseUrl, HttpClient? httpClient) : base(auth, parasutBaseUrl, httpClient)
     {
     }
 
     /// <summary>
     /// Get the status of a trackable job.
     /// </summary>
-    /// <returns></returns>
-    public async Task<ParasutServiceResult<TrackableJobResponse>> GetStatus(TrackableJobRequest request)
+    public async Task<ParasutServiceResult<TrackableJobResponse>> GetStatus(TrackableJobRequest request, CancellationToken cancellationToken = default)
     {
         var result = new ParasutServiceResult<TrackableJobResponse>();
 
-        var nm = new NetworkManager(ParasutBaseUrl);
-        nm.AddContentTypeJSONHeader();
-
-        var token = await Auth.Token();
-        if (!token.IsSuccess)
+        var token = await GetAccessTokenAsync(result, cancellationToken).ConfigureAwait(false);
+        if (token is null)
         {
-            result.SetError("Token alınamadı.");
             return result;
         }
-        nm.AddBearerToken(token.Data.access_token);
 
-        var httpResponse = await nm.PostAsync<TrackableJobResponse>("/trackable_jobs/" + request.id, request);
-        if (httpResponse.IsSuccess)
-        {
-            result.Data = httpResponse.Data;
-        }
-        else
-        {
-            result.SetError(httpResponse.Message);
-        }
-
-        return result;
+        // Paraşüt bu kaydı yalnızca GET ile döner; gövde göndermez.
+        return await Http.GetAsync<TrackableJobResponse>($"/trackable_jobs/{request.id}", token, cancellationToken).ConfigureAwait(false);
     }
 }
