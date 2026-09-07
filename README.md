@@ -191,7 +191,7 @@ if (!response.IsSuccess)
 | `parasut.InvoicePayment` | `Pay()` | Faturaya ödeme ekler |
 | `parasut.CustomerPayment` | `ContactDebitTransactions()` | Müşteriye ödeme/tahsilat ekler |
 | `parasut.EInvoiceInbox` | `List()` | E-fatura gelen kutusu sorgular |
-| `parasut.EInvoice` | `Create()` | Faturayı e-faturaya dönüştürür |
+| `parasut.EInvoice` | `Create()` | Faturayı e-faturaya dönüştürür (özel firma gereksinimleri dahil) |
 | `parasut.EArchive` | `Create()` | Faturayı e-arşiv faturasına dönüştürür |
 | `parasut.TrackableJob` | `GetStatus()` | E-fatura/e-arşiv işlem durumunu sorgular |
 
@@ -218,6 +218,7 @@ var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", 
 - [Faturayı E-Faturaya Dönüştürmek](#faturayı-e-faturaya-dönüştürmek)
 - [Faturayı E-Arşiv Faturasına Dönüştürmek](#faturayı-e-arşiv-faturasına-dönüştürmek)
 - [Fatura İşlem Durumunu Sorgulamak](#fatura-i̇şlem-durumunu-sorgulamak)
+- [Belirli Firmalar İçin Özel Gereksinimler (SGK vb.)](#belirli-firmalar-i̇çin-özel-gereksinimler-sgk-vb)
 
 ### Yeni Müşteri Yaratmak
 
@@ -542,6 +543,65 @@ else
     Console.WriteLine("HATA: " + response.Message);
 }
 ```
+
+### Belirli Firmalar İçin Özel Gereksinimler (SGK vb.)
+
+Özel gereksinim duyan bir firmaya e-fatura keserken `custom_requirement_params` alanını doldurmanız gerekir. Aşağıda SGK için gereken alanlar gösterilmiştir.
+
+```csharp
+var model = new EInvoiceCreateRequest
+{
+    data = new EInvoiceCreateRequest_Data
+    {
+        attributes = new EInvoiceCreateRequest_Data_Attributes
+        {
+            scenario = "commercial",
+            to = "urn:mail:defaultpk@ornek.com",
+            custom_requirement_params = new EInvoiceCreateRequest_Data_Attributes_CustomRequirementParams
+            {
+                integration = new EInvoiceCreateRequest_Data_Attributes_CustomRequirementParams_Integration
+                {
+                    data = new EInvoiceCreateRequest_Data_Attributes_CustomRequirementParams_Integration_Data
+                    {
+                        additional_invoice_type = AdditionalInvoiceTypes.SAGLIK_ECZ,
+                        tax_payer_code = "Mükellef kodu",
+                        tax_payer_name = "Mükellef adı",
+                        file_number = "Dosya numarası",
+                        term_start_date = "2021-01-02",
+                        term_end_date = "2021-01-04"
+                    }
+                }
+            }
+        },
+        relationships = new EInvoiceCreateRequest_Data_Relationships
+        {
+            invoice = new EInvoiceCreateRequest_Data_Relationships_Invoice
+            {
+                data = new EInvoiceCreateRequest_Data_Relationships_Invoice_Data { id = "FATURA NO" }
+            }
+        }
+    }
+};
+
+var response = await parasut.EInvoice.Create(model);
+```
+
+`additional_invoice_type` için geçerli değerler `AdditionalInvoiceTypes` sınıfındadır: `SAGLIK_ECZ`, `SAGLIK_HAS`, `SAGLIK_OPT`, `SAGLIK_MED`, `ABONELIK`, `MAL_HIZMET`, `DIGER`.
+
+Paraşüt bu alanın içeriğini serbest biçimli bir obje olarak tanımlar ve desteklenen firma listesi zamanla değişebilir. Yukarıdaki alanlar dışında bir alan göndermeniz gerekirse `additional_params` sözlüğünü kullanın; içeriği gövdeye aynı seviyede yazılır:
+
+```csharp
+var data = new EInvoiceCreateRequest_Data_Attributes_CustomRequirementParams_Integration_Data
+{
+    additional_invoice_type = AdditionalInvoiceTypes.MAL_HIZMET,
+    additional_params = new Dictionary<string, object>
+    {
+        ["yeni_alan"] = "değer"
+    }
+};
+```
+
+Ayrıntılı bilgi: [Paraşüt dokümanı — Belirli Firmalar İçin Özel Gereksinimler](https://apidocs.parasut.com/#section/SIK-KULLANILAN-ISLEMLER/Belirli-Firmalar-Icin-Ozel-Gereksinimler)
 
 ---
 
