@@ -137,3 +137,25 @@ public class CustomerListQuery : ParasutListQuery
         Filter("account_type", account_type);
     }
 }
+
+/// <summary>
+/// Ürün/hizmet listeleme filtreleri.
+/// </summary>
+public class ProductListQuery : ParasutListQuery
+{
+    /// <summary>
+    /// Ürün/hizmet adı
+    /// </summary>
+    public string? name { get; set; }
+
+    /// <summary>
+    /// Ürün/hizmet kodu
+    /// </summary>
+    public string? code { get; set; }
+
+    protected override void OnBuild()
+    {
+        Filter("name", name);
+        Filter("code", code);
+    }
+}
