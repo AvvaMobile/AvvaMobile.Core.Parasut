@@ -38,6 +38,54 @@ public class ParasutBaseService
     }
 
     /// <summary>
+    /// Tek kayıt getirme isteklerinin ortak gövdesi.
+    /// </summary>
+    private protected async Task<ParasutServiceResult<T>> GetByIdAsync<T>(string path, CancellationToken cancellationToken)
+    {
+        var result = new ParasutServiceResult<T>();
+
+        var token = await GetAccessTokenAsync(result, cancellationToken).ConfigureAwait(false);
+        if (token is null)
+        {
+            return result;
+        }
+
+        return await Http.GetAsync<T>(path, token, cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// Listeleme isteklerinin ortak gövdesi.
+    /// </summary>
+    private protected async Task<ParasutServiceResult<ParasutListResponse<T>>> ListAsync<T>(string path, ParasutListQuery? query, CancellationToken cancellationToken)
+    {
+        var result = new ParasutServiceResult<ParasutListResponse<T>>();
+
+        var token = await GetAccessTokenAsync(result, cancellationToken).ConfigureAwait(false);
+        if (token is null)
+        {
+            return result;
+        }
+
+        return await Http.GetAsync<ParasutListResponse<T>>(path + (query?.ToQueryString() ?? string.Empty), token, cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// Silme isteklerinin ortak gövdesi.
+    /// </summary>
+    private protected async Task<ParasutServiceResult> DeleteAsync(string path, CancellationToken cancellationToken)
+    {
+        var result = new ParasutServiceResult();
+
+        var token = await GetAccessTokenAsync(result, cancellationToken).ConfigureAwait(false);
+        if (token is null)
+        {
+            return result;
+        }
+
+        return await Http.DeleteAsync(path, token, cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <summary>
     /// Geçerli bir access token döner. Token alınamazsa <paramref name="result"/> hata ile işaretlenir ve null döner.
     /// </summary>
     private protected async Task<string?> GetAccessTokenAsync(ParasutServiceResult result, CancellationToken cancellationToken)

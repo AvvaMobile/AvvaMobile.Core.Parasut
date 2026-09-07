@@ -49,6 +49,24 @@ internal sealed class ParasutHttpClient
     public Task<ParasutServiceResult<T>> PutAsync<T>(string path, object? body, string? bearerToken = null, CancellationToken cancellationToken = default)
         => SendAsync<T>(HttpMethod.Put, path, body, bearerToken, cancellationToken);
 
+    public Task<ParasutServiceResult<T>> PatchAsync<T>(string path, object? body, string? bearerToken = null, CancellationToken cancellationToken = default)
+        => SendAsync<T>(new HttpMethod("PATCH"), path, body, bearerToken, cancellationToken);
+
+    /// <summary>
+    /// Gövde döndürmeyen silme isteği. Paraşüt başarılı silmede 204 döner.
+    /// </summary>
+    public async Task<ParasutServiceResult> DeleteAsync(string path, string? bearerToken = null, CancellationToken cancellationToken = default)
+    {
+        var response = await SendAsync<object>(HttpMethod.Delete, path, null, bearerToken, cancellationToken).ConfigureAwait(false);
+
+        return new ParasutServiceResult
+        {
+            IsSuccess = response.IsSuccess,
+            Message = response.Message,
+            Errors = response.Errors
+        };
+    }
+
     private async Task<ParasutServiceResult<T>> SendAsync<T>(HttpMethod method, string path, object? body, string? bearerToken, CancellationToken cancellationToken)
     {
         var result = new ParasutServiceResult<T>();
