@@ -104,37 +104,43 @@ public class ParasutListQuery
 public class CustomerListQuery : ParasutListQuery
 {
     /// <summary>
-    /// Ünvan/ad
+    /// Ünvan/ad. API karşılığı: filter[name]
     /// </summary>
-    public string? name { get; set; }
-
-    public string? email { get; set; }
+    public string? Name { get; set; }
 
     /// <summary>
-    /// Vergi numarası
+    /// E-posta. API karşılığı: filter[email]
     /// </summary>
-    public string? tax_number { get; set; }
+    public string? Email { get; set; }
 
     /// <summary>
-    /// Vergi dairesi
+    /// Vergi numarası. API karşılığı: filter[tax_number]
     /// </summary>
-    public string? tax_office { get; set; }
-
-    public string? city { get; set; }
+    public string? TaxNumber { get; set; }
 
     /// <summary>
-    /// customer veya supplier
+    /// Vergi dairesi. API karşılığı: filter[tax_office]
     /// </summary>
-    public string? account_type { get; set; }
+    public string? TaxOffice { get; set; }
+
+    /// <summary>
+    /// Şehir. API karşılığı: filter[city]
+    /// </summary>
+    public string? City { get; set; }
+
+    /// <summary>
+    /// customer veya supplier. API karşılığı: filter[account_type]
+    /// </summary>
+    public string? AccountType { get; set; }
 
     protected override void OnBuild()
     {
-        Filter("name", name);
-        Filter("email", email);
-        Filter("tax_number", tax_number);
-        Filter("tax_office", tax_office);
-        Filter("city", city);
-        Filter("account_type", account_type);
+        Filter("name", Name);
+        Filter("email", Email);
+        Filter("tax_number", TaxNumber);
+        Filter("tax_office", TaxOffice);
+        Filter("city", City);
+        Filter("account_type", AccountType);
     }
 }
 
@@ -144,19 +150,19 @@ public class CustomerListQuery : ParasutListQuery
 public class ProductListQuery : ParasutListQuery
 {
     /// <summary>
-    /// Ürün/hizmet adı
+    /// Ürün/hizmet adı. API karşılığı: filter[name]
     /// </summary>
-    public string? name { get; set; }
+    public string? Name { get; set; }
 
     /// <summary>
-    /// Ürün/hizmet kodu
+    /// Ürün/hizmet kodu. API karşılığı: filter[code]
     /// </summary>
-    public string? code { get; set; }
+    public string? Code { get; set; }
 
     protected override void OnBuild()
     {
-        Filter("name", name);
-        Filter("code", code);
+        Filter("name", Name);
+        Filter("code", Code);
     }
 }
 
@@ -166,54 +172,54 @@ public class ProductListQuery : ParasutListQuery
 public class InvoiceListQuery : ParasutListQuery
 {
     /// <summary>
-    /// Düzenleme tarihi
+    /// Düzenleme tarihi. API karşılığı: filter[issue_date]
     /// </summary>
-    public string? issue_date { get; set; }
+    public string? IssueDate { get; set; }
 
     /// <summary>
-    /// Son tahsilat tarihi
+    /// Son tahsilat tarihi. API karşılığı: filter[due_date]
     /// </summary>
-    public string? due_date { get; set; }
+    public string? DueDate { get; set; }
 
     /// <summary>
-    /// Müşterinin Paraşüt'teki ID'si
+    /// Müşterinin Paraşüt ID'si. API karşılığı: filter[contact_id]
     /// </summary>
-    public string? contact_id { get; set; }
+    public string? ContactId { get; set; }
 
     /// <summary>
-    /// Fatura sıra numarası
+    /// Fatura sıra numarası. API karşılığı: filter[invoice_id]
     /// </summary>
-    public string? invoice_id { get; set; }
+    public string? InvoiceId { get; set; }
 
     /// <summary>
-    /// Fatura serisi
+    /// Fatura serisi. API karşılığı: filter[invoice_series]
     /// </summary>
-    public string? invoice_series { get; set; }
+    public string? InvoiceSeries { get; set; }
 
     /// <summary>
-    /// Fatura türü: invoice, export, estimate, cancelled, refund vb.
+    /// Fatura türü: invoice, export, estimate, cancelled, refund vb. API karşılığı: filter[item_type]
     /// </summary>
-    public string? item_type { get; set; }
+    public string? ItemType { get; set; }
 
     /// <summary>
-    /// Yazdırma durumu
+    /// Yazdırma durumu. API karşılığı: filter[print_status]
     /// </summary>
-    public string? print_status { get; set; }
+    public string? PrintStatus { get; set; }
 
     /// <summary>
-    /// Tahsilat durumu: paid, overdue, unpaid, partially_paid
+    /// Tahsilat durumu: paid, overdue, unpaid, partially_paid. API karşılığı: filter[payment_status]
     /// </summary>
-    public string? payment_status { get; set; }
+    public string? PaymentStatus { get; set; }
 
     protected override void OnBuild()
     {
-        Filter("issue_date", issue_date);
-        Filter("due_date", due_date);
-        Filter("contact_id", contact_id);
-        Filter("invoice_id", invoice_id);
-        Filter("invoice_series", invoice_series);
-        Filter("item_type", item_type);
-        Filter("print_status", print_status);
-        Filter("payment_status", payment_status);
+        Filter("issue_date", IssueDate);
+        Filter("due_date", DueDate);
+        Filter("contact_id", ContactId);
+        Filter("invoice_id", InvoiceId);
+        Filter("invoice_series", InvoiceSeries);
+        Filter("item_type", ItemType);
+        Filter("print_status", PrintStatus);
+        Filter("payment_status", PaymentStatus);
     }
 }

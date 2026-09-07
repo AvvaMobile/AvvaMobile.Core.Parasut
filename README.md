@@ -228,8 +228,8 @@ var parasut = new Parasut("USERNAME", "PASSWORD", "CLIENT ID", "CLIENT SECRET", 
 ```csharp
 var response = await parasut.Customer.List(new CustomerListQuery
 {
-    name = "Avva",
-    account_type = "customer",
+    Name = "Avva",
+    AccountType = "customer",
     Sort = "-created_at",
     PageNumber = 1,
     PageSize = 50
@@ -247,12 +247,20 @@ if (response.IsSuccess)
 }
 ```
 
-Her servisin kendi filtre sınıfı vardır: `CustomerListQuery` (name, email, tax_number, tax_office, city, account_type), `ProductListQuery` (name, code), `InvoiceListQuery` (issue_date, due_date, contact_id, invoice_id, invoice_series, item_type, print_status, payment_status).
+Her servisin kendi filtre sınıfı vardır:
+
+| Sınıf | Filtreler |
+| --- | --- |
+| `CustomerListQuery` | `Name`, `Email`, `TaxNumber`, `TaxOffice`, `City`, `AccountType` |
+| `ProductListQuery` | `Name`, `Code` |
+| `InvoiceListQuery` | `IssueDate`, `DueDate`, `ContactId`, `InvoiceId`, `InvoiceSeries`, `ItemType`, `PrintStatus`, `PaymentStatus` |
+
+Hepsi ortak olarak `Sort`, `PageNumber`, `PageSize` ve `Include` alanlarını da taşır.
 
 Tipli alanlar dışında bir filtre göndermeniz gerekirse `Filter()` kullanın:
 
 ```csharp
-var query = new InvoiceListQuery { payment_status = "unpaid" };
+var query = new InvoiceListQuery { PaymentStatus = "unpaid" };
 query.Filter("invoice_series", "A");
 ```
 
