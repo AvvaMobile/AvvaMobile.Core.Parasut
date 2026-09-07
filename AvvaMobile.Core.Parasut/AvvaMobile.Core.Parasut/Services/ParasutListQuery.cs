@@ -159,3 +159,61 @@ public class ProductListQuery : ParasutListQuery
         Filter("code", code);
     }
 }
+
+/// <summary>
+/// Satış faturası listeleme filtreleri.
+/// </summary>
+public class InvoiceListQuery : ParasutListQuery
+{
+    /// <summary>
+    /// Düzenleme tarihi
+    /// </summary>
+    public string? issue_date { get; set; }
+
+    /// <summary>
+    /// Son tahsilat tarihi
+    /// </summary>
+    public string? due_date { get; set; }
+
+    /// <summary>
+    /// Müşterinin Paraşüt'teki ID'si
+    /// </summary>
+    public string? contact_id { get; set; }
+
+    /// <summary>
+    /// Fatura sıra numarası
+    /// </summary>
+    public string? invoice_id { get; set; }
+
+    /// <summary>
+    /// Fatura serisi
+    /// </summary>
+    public string? invoice_series { get; set; }
+
+    /// <summary>
+    /// Fatura türü: invoice, export, estimate, cancelled, refund vb.
+    /// </summary>
+    public string? item_type { get; set; }
+
+    /// <summary>
+    /// Yazdırma durumu
+    /// </summary>
+    public string? print_status { get; set; }
+
+    /// <summary>
+    /// Tahsilat durumu: paid, overdue, unpaid, partially_paid
+    /// </summary>
+    public string? payment_status { get; set; }
+
+    protected override void OnBuild()
+    {
+        Filter("issue_date", issue_date);
+        Filter("due_date", due_date);
+        Filter("contact_id", contact_id);
+        Filter("invoice_id", invoice_id);
+        Filter("invoice_series", invoice_series);
+        Filter("item_type", item_type);
+        Filter("print_status", print_status);
+        Filter("payment_status", payment_status);
+    }
+}
