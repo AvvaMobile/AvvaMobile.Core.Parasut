@@ -27,7 +27,7 @@ Paraşüt'ün orijinal API dokümanları: [apidocs.parasut.com](https://apidocs.
 - [Servis Sonucu (Envelope)](#servis-sonucu-envelope)
 - [Desteklenen Servisler](#desteklenen-servisler)
 - [Örnekler](#örnekler)
-- [1.1.x → 1.2.0 Geçiş Notları](#11x--120-geçiş-notları)
+- [1.1.x → 2.0.0 Geçiş Notları](#11x--200-geçiş-notları)
 - [Katkı ve İletişim](#katkı-ve-i̇letişim)
 
 ---
@@ -605,9 +605,17 @@ Ayrıntılı bilgi: [Paraşüt dokümanı — Belirli Firmalar İçin Özel Gere
 
 ---
 
-## 1.1.x → 1.2.0 Geçiş Notları
+## 1.1.x → 2.0.0 Geçiş Notları
 
-1.1.x'ten gelen kod **değişiklik gerektirmeden derlenir**. Yine de üç noktaya dikkat edin.
+1.1.x'ten gelen kod, paketin kendi API'si açısından **değişiklik gerektirmeden derlenir**. Yine de aşağıdaki noktalara dikkat edin.
+
+**0. Newtonsoft.Json artık bağımlılık değil.** Paket sıfır bağımlılıkla gelir; JSON işlemleri `System.Text.Json` ile yapılır. 1.1.x'te Newtonsoft'u bu paket üzerinden **transitive** olarak alan projeler `Newtonsoft could not be found` hatası alır. Çözüm: kendi projenize açıkça ekleyin.
+
+```bash
+dotnet add package Newtonsoft.Json
+```
+
+Bu, major sürüm çıkarmamızın sebebidir; paketin genel API'sinde başka bir kırılma yoktur.
 
 **1. Düzeltilen alan adları.** Paraşüt API'ında karşılığı olmayan iki alan yüzünden bazı veriler sessizce boş geliyordu. Eski adlar çalışmaya devam ediyor (yeni alana yönlendiriliyor), ancak yenilerini kullanın:
 
@@ -632,7 +640,7 @@ new InvoiceRequest_Data_Relationships_Details_Data_Attributes
 
 **3. Token artık önbelleğe alınıyor.** Her servis çağrısı ayrı token isteği atmıyor. Ayrıntı için [Token Yönetimi](#token-yönetimi) bölümüne bakın.
 
-Ayrıca bu sürümde: paket harici bağımlılıklarından arındırıldı (`HttpClient` + `System.Text.Json`), `CancellationToken` desteği eklendi, kendi `HttpClient`'ınızı verebilir hâle geldi, hata gövdeleri `Errors` listesine çözümleniyor ve `TrackableJob.GetStatus` artık doğru HTTP metodunu (`GET`) kullanıyor.
+Ayrıca bu sürümde: `CancellationToken` desteği eklendi, kendi `HttpClient`'ınızı verebilir hâle geldiniz, hata gövdeleri `Errors` listesine çözümleniyor, `TrackableJob.GetStatus` artık doğru HTTP metodunu (`GET`) kullanıyor ve özel firma gereksinimleri için [`custom_requirement_params`](#belirli-firmalar-i̇çin-özel-gereksinimler-sgk-vb) eklendi.
 
 ---
 
