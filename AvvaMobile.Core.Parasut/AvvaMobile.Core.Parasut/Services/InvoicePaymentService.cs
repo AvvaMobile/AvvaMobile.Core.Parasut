@@ -11,6 +11,19 @@ public class InvoicePaymentService : ParasutBaseService
     }
 
     /// <summary>
+    /// Kaydedilmiş bir ödemeyi (kasa/banka hareketini) ID'si ile getirir.
+    /// Ödeme kaydının ID'si Pay metodunun döndürdüğü data.id değeridir.
+    /// </summary>
+    public Task<ParasutServiceResult<TransactionResponse>> Get(string transactionId, CancellationToken cancellationToken = default)
+        => GetByIdAsync<TransactionResponse>($"/transactions/{Uri.EscapeDataString(transactionId)}", cancellationToken);
+
+    /// <summary>
+    /// Kaydedilmiş bir ödemeyi siler.
+    /// </summary>
+    public Task<ParasutServiceResult> Delete(string transactionId, CancellationToken cancellationToken = default)
+        => DeleteAsync($"/transactions/{Uri.EscapeDataString(transactionId)}", cancellationToken);
+
+    /// <summary>
     /// Bir satış faturasına ödeme kaydeder.
     /// </summary>
     public async Task<ParasutServiceResult<InvoicePaymentResponse>> Pay(InvoicePaymentRequest payment, string invoiceId, CancellationToken cancellationToken = default)
